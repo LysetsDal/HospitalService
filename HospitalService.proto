@@ -12,13 +12,13 @@ protoc --go_out=. --go_opt=paths=source_relative --go-grpc_out=. \
 */
 
 // PEER-2-PEER FOR CLIENTS 
-service Client {
+service Client_ {
     rpc ping (ClientConnect) returns (ClientResponse) {}
     rpc SendMessage (Message) returns (EmptyMessage) {}
 }
 
 // HOSPITAL SERVER INTERFACE
-service Hospital_Server {
+service Hospital_ {
     rpc NewConnection (ClientConnect) returns (ClientResponse) {}
     rpc CloseConnection (ClientDisconnect) returns (ServerResponse) {}
 }
