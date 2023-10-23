@@ -19,8 +19,8 @@ import (
 const _ = grpc.SupportPackageIsVersion7
 
 const (
-	HospitalService_SendMessage_FullMethodName = "/HospitalService.HospitalService/SendMessage"
-	HospitalService_GetPeers_FullMethodName    = "/HospitalService.HospitalService/GetPeers"
+	HospitalService_SendMessage_FullMethodName = "/hospital.HospitalService/SendMessage"
+	HospitalService_GetPeers_FullMethodName    = "/hospital.HospitalService/GetPeers"
 )
 
 // HospitalServiceClient is the client API for HospitalService service.
@@ -129,7 +129,7 @@ func _HospitalService_GetPeers_Handler(srv interface{}, ctx context.Context, dec
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
 var HospitalService_ServiceDesc = grpc.ServiceDesc{
-	ServiceName: "HospitalService.HospitalService",
+	ServiceName: "hospital.HospitalService",
 	HandlerType: (*HospitalServiceServer)(nil),
 	Methods: []grpc.MethodDesc{
 		{

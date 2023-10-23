@@ -1,6 +1,6 @@
 syntax = "proto3";
 
-package HospitalService;
+package hospital;
 
 option go_package = "HospitalService/proto";
 
