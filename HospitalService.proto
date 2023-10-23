@@ -4,8 +4,6 @@ package hospital;
 
 option go_package = "HospitalService/proto";
 
-// import "google/protobuf/empty.proto";
-
 /*
 protoc --go_out=. --go_opt=paths=source_relative --go-grpc_out=. \
 --go-grpc_opt=paths=source_relative HospitalService/HospitalService.proto
