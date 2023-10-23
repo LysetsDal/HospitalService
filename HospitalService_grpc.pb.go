@@ -19,126 +19,126 @@ import (
 const _ = grpc.SupportPackageIsVersion7
 
 const (
-	Client_Ping_FullMethodName        = "/HospitalService.Client/ping"
-	Client_SendMessage_FullMethodName = "/HospitalService.Client/SendMessage"
+	Client__Ping_FullMethodName    = "/HospitalService.Client_/ping"
+	Client__SendMsg_FullMethodName = "/HospitalService.Client_/sendMsg"
 )
 
-// ClientClient is the client API for Client service.
+// Client_Client is the client API for Client_ service.
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
-type ClientClient interface {
-	Ping(ctx context.Context, in *ClientConnect, opts ...grpc.CallOption) (*ClientResponse, error)
-	SendMessage(ctx context.Context, in *Message, opts ...grpc.CallOption) (*EmptyMessage, error)
+type Client_Client interface {
+	Ping(ctx context.Context, in *ClientID, opts ...grpc.CallOption) (*Message, error)
+	SendMsg(ctx context.Context, in *Message, opts ...grpc.CallOption) (*Message, error)
 }
 
-type clientClient struct {
+type client_Client struct {
 	cc grpc.ClientConnInterface
 }
 
-func NewClientClient(cc grpc.ClientConnInterface) ClientClient {
-	return &clientClient{cc}
+func NewClient_Client(cc grpc.ClientConnInterface) Client_Client {
+	return &client_Client{cc}
 }
 
-func (c *clientClient) Ping(ctx context.Context, in *ClientConnect, opts ...grpc.CallOption) (*ClientResponse, error) {
-	out := new(ClientResponse)
-	err := c.cc.Invoke(ctx, Client_Ping_FullMethodName, in, out, opts...)
+func (c *client_Client) Ping(ctx context.Context, in *ClientID, opts ...grpc.CallOption) (*Message, error) {
+	out := new(Message)
+	err := c.cc.Invoke(ctx, Client__Ping_FullMethodName, in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *clientClient) SendMessage(ctx context.Context, in *Message, opts ...grpc.CallOption) (*EmptyMessage, error) {
-	out := new(EmptyMessage)
-	err := c.cc.Invoke(ctx, Client_SendMessage_FullMethodName, in, out, opts...)
+func (c *client_Client) SendMsg(ctx context.Context, in *Message, opts ...grpc.CallOption) (*Message, error) {
+	out := new(Message)
+	err := c.cc.Invoke(ctx, Client__SendMsg_FullMethodName, in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-// ClientServer is the server API for Client service.
-// All implementations must embed UnimplementedClientServer
+// Client_Server is the server API for Client_ service.
+// All implementations must embed UnimplementedClient_Server
 // for forward compatibility
-type ClientServer interface {
-	Ping(context.Context, *ClientConnect) (*ClientResponse, error)
-	SendMessage(context.Context, *Message) (*EmptyMessage, error)
-	mustEmbedUnimplementedClientServer()
+type Client_Server interface {
+	Ping(context.Context, *ClientID) (*Message, error)
+	SendMsg(context.Context, *Message) (*Message, error)
+	mustEmbedUnimplementedClient_Server()
 }
 
-// UnimplementedClientServer must be embedded to have forward compatible implementations.
-type UnimplementedClientServer struct {
+// UnimplementedClient_Server must be embedded to have forward compatible implementations.
+type UnimplementedClient_Server struct {
 }
 
-func (UnimplementedClientServer) Ping(context.Context, *ClientConnect) (*ClientResponse, error) {
+func (UnimplementedClient_Server) Ping(context.Context, *ClientID) (*Message, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method Ping not implemented")
 }
-func (UnimplementedClientServer) SendMessage(context.Context, *Message) (*EmptyMessage, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method SendMessage not implemented")
+func (UnimplementedClient_Server) SendMsg(context.Context, *Message) (*Message, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method SendMsg not implemented")
 }
-func (UnimplementedClientServer) mustEmbedUnimplementedClientServer() {}
+func (UnimplementedClient_Server) mustEmbedUnimplementedClient_Server() {}
 
-// UnsafeClientServer may be embedded to opt out of forward compatibility for this service.
-// Use of this interface is not recommended, as added methods to ClientServer will
+// UnsafeClient_Server may be embedded to opt out of forward compatibility for this service.
+// Use of this interface is not recommended, as added methods to Client_Server will
 // result in compilation errors.
-type UnsafeClientServer interface {
-	mustEmbedUnimplementedClientServer()
+type UnsafeClient_Server interface {
+	mustEmbedUnimplementedClient_Server()
 }
 
-func RegisterClientServer(s grpc.ServiceRegistrar, srv ClientServer) {
-	s.RegisterService(&Client_ServiceDesc, srv)
+func RegisterClient_Server(s grpc.ServiceRegistrar, srv Client_Server) {
+	s.RegisterService(&Client__ServiceDesc, srv)
 }
 
-func _Client_Ping_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(ClientConnect)
+func _Client__Ping_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ClientID)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(ClientServer).Ping(ctx, in)
+		return srv.(Client_Server).Ping(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: Client_Ping_FullMethodName,
+		FullMethod: Client__Ping_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(ClientServer).Ping(ctx, req.(*ClientConnect))
+		return srv.(Client_Server).Ping(ctx, req.(*ClientID))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _Client_SendMessage_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _Client__SendMsg_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(Message)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(ClientServer).SendMessage(ctx, in)
+		return srv.(Client_Server).SendMsg(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: Client_SendMessage_FullMethodName,
+		FullMethod: Client__SendMsg_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(ClientServer).SendMessage(ctx, req.(*Message))
+		return srv.(Client_Server).SendMsg(ctx, req.(*Message))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-// Client_ServiceDesc is the grpc.ServiceDesc for Client service.
+// Client__ServiceDesc is the grpc.ServiceDesc for Client_ service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
-var Client_ServiceDesc = grpc.ServiceDesc{
-	ServiceName: "HospitalService.Client",
-	HandlerType: (*ClientServer)(nil),
+var Client__ServiceDesc = grpc.ServiceDesc{
+	ServiceName: "HospitalService.Client_",
+	HandlerType: (*Client_Server)(nil),
 	Methods: []grpc.MethodDesc{
 		{
 			MethodName: "ping",
-			Handler:    _Client_Ping_Handler,
+			Handler:    _Client__Ping_Handler,
 		},
 		{
-			MethodName: "SendMessage",
-			Handler:    _Client_SendMessage_Handler,
+			MethodName: "sendMsg",
+			Handler:    _Client__SendMsg_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
@@ -146,128 +146,156 @@ var Client_ServiceDesc = grpc.ServiceDesc{
 }
 
 const (
-	Hospital_Server_NewConnection_FullMethodName   = "/HospitalService.Hospital_Server/NewConnection"
-	Hospital_Server_CloseConnection_FullMethodName = "/HospitalService.Hospital_Server/CloseConnection"
+	Hospital__NewConnection_FullMethodName = "/HospitalService.Hospital_/NewConnection"
+	Hospital__GetPeers_FullMethodName      = "/HospitalService.Hospital_/GetPeers"
 )
 
-// Hospital_ServerClient is the client API for Hospital_Server service.
+// Hospital_Client is the client API for Hospital_ service.
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
-type Hospital_ServerClient interface {
-	NewConnection(ctx context.Context, in *ClientConnect, opts ...grpc.CallOption) (*ClientResponse, error)
-	CloseConnection(ctx context.Context, in *ClientDisconnect, opts ...grpc.CallOption) (*ServerResponse, error)
+type Hospital_Client interface {
+	NewConnection(ctx context.Context, in *ClientID, opts ...grpc.CallOption) (*ClientResponse, error)
+	GetPeers(ctx context.Context, in *Message, opts ...grpc.CallOption) (Hospital__GetPeersClient, error)
 }
 
-type hospital_ServerClient struct {
+type hospital_Client struct {
 	cc grpc.ClientConnInterface
 }
 
-func NewHospital_ServerClient(cc grpc.ClientConnInterface) Hospital_ServerClient {
-	return &hospital_ServerClient{cc}
+func NewHospital_Client(cc grpc.ClientConnInterface) Hospital_Client {
+	return &hospital_Client{cc}
 }
 
-func (c *hospital_ServerClient) NewConnection(ctx context.Context, in *ClientConnect, opts ...grpc.CallOption) (*ClientResponse, error) {
+func (c *hospital_Client) NewConnection(ctx context.Context, in *ClientID, opts ...grpc.CallOption) (*ClientResponse, error) {
 	out := new(ClientResponse)
-	err := c.cc.Invoke(ctx, Hospital_Server_NewConnection_FullMethodName, in, out, opts...)
+	err := c.cc.Invoke(ctx, Hospital__NewConnection_FullMethodName, in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *hospital_ServerClient) CloseConnection(ctx context.Context, in *ClientDisconnect, opts ...grpc.CallOption) (*ServerResponse, error) {
-	out := new(ServerResponse)
-	err := c.cc.Invoke(ctx, Hospital_Server_CloseConnection_FullMethodName, in, out, opts...)
+func (c *hospital_Client) GetPeers(ctx context.Context, in *Message, opts ...grpc.CallOption) (Hospital__GetPeersClient, error) {
+	stream, err := c.cc.NewStream(ctx, &Hospital__ServiceDesc.Streams[0], Hospital__GetPeers_FullMethodName, opts...)
 	if err != nil {
 		return nil, err
 	}
-	return out, nil
+	x := &hospital_GetPeersClient{stream}
+	if err := x.ClientStream.SendMsg(in); err != nil {
+		return nil, err
+	}
+	if err := x.ClientStream.CloseSend(); err != nil {
+		return nil, err
+	}
+	return x, nil
 }
 
-// Hospital_ServerServer is the server API for Hospital_Server service.
-// All implementations must embed UnimplementedHospital_ServerServer
+type Hospital__GetPeersClient interface {
+	Recv() (*ClientID, error)
+	grpc.ClientStream
+}
+
+type hospital_GetPeersClient struct {
+	grpc.ClientStream
+}
+
+func (x *hospital_GetPeersClient) Recv() (*ClientID, error) {
+	m := new(ClientID)
+	if err := x.ClientStream.RecvMsg(m); err != nil {
+		return nil, err
+	}
+	return m, nil
+}
+
+// Hospital_Server is the server API for Hospital_ service.
+// All implementations must embed UnimplementedHospital_Server
 // for forward compatibility
-type Hospital_ServerServer interface {
-	NewConnection(context.Context, *ClientConnect) (*ClientResponse, error)
-	CloseConnection(context.Context, *ClientDisconnect) (*ServerResponse, error)
-	mustEmbedUnimplementedHospital_ServerServer()
+type Hospital_Server interface {
+	NewConnection(context.Context, *ClientID) (*ClientResponse, error)
+	GetPeers(*Message, Hospital__GetPeersServer) error
+	mustEmbedUnimplementedHospital_Server()
 }
 
-// UnimplementedHospital_ServerServer must be embedded to have forward compatible implementations.
-type UnimplementedHospital_ServerServer struct {
+// UnimplementedHospital_Server must be embedded to have forward compatible implementations.
+type UnimplementedHospital_Server struct {
 }
 
-func (UnimplementedHospital_ServerServer) NewConnection(context.Context, *ClientConnect) (*ClientResponse, error) {
+func (UnimplementedHospital_Server) NewConnection(context.Context, *ClientID) (*ClientResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method NewConnection not implemented")
 }
-func (UnimplementedHospital_ServerServer) CloseConnection(context.Context, *ClientDisconnect) (*ServerResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method CloseConnection not implemented")
+func (UnimplementedHospital_Server) GetPeers(*Message, Hospital__GetPeersServer) error {
+	return status.Errorf(codes.Unimplemented, "method GetPeers not implemented")
 }
-func (UnimplementedHospital_ServerServer) mustEmbedUnimplementedHospital_ServerServer() {}
+func (UnimplementedHospital_Server) mustEmbedUnimplementedHospital_Server() {}
 
-// UnsafeHospital_ServerServer may be embedded to opt out of forward compatibility for this service.
-// Use of this interface is not recommended, as added methods to Hospital_ServerServer will
+// UnsafeHospital_Server may be embedded to opt out of forward compatibility for this service.
+// Use of this interface is not recommended, as added methods to Hospital_Server will
 // result in compilation errors.
-type UnsafeHospital_ServerServer interface {
-	mustEmbedUnimplementedHospital_ServerServer()
+type UnsafeHospital_Server interface {
+	mustEmbedUnimplementedHospital_Server()
 }
 
-func RegisterHospital_ServerServer(s grpc.ServiceRegistrar, srv Hospital_ServerServer) {
-	s.RegisterService(&Hospital_Server_ServiceDesc, srv)
+func RegisterHospital_Server(s grpc.ServiceRegistrar, srv Hospital_Server) {
+	s.RegisterService(&Hospital__ServiceDesc, srv)
 }
 
-func _Hospital_Server_NewConnection_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(ClientConnect)
+func _Hospital__NewConnection_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ClientID)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(Hospital_ServerServer).NewConnection(ctx, in)
+		return srv.(Hospital_Server).NewConnection(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: Hospital_Server_NewConnection_FullMethodName,
+		FullMethod: Hospital__NewConnection_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(Hospital_ServerServer).NewConnection(ctx, req.(*ClientConnect))
+		return srv.(Hospital_Server).NewConnection(ctx, req.(*ClientID))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _Hospital_Server_CloseConnection_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(ClientDisconnect)
-	if err := dec(in); err != nil {
-		return nil, err
+func _Hospital__GetPeers_Handler(srv interface{}, stream grpc.ServerStream) error {
+	m := new(Message)
+	if err := stream.RecvMsg(m); err != nil {
+		return err
 	}
-	if interceptor == nil {
-		return srv.(Hospital_ServerServer).CloseConnection(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: Hospital_Server_CloseConnection_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(Hospital_ServerServer).CloseConnection(ctx, req.(*ClientDisconnect))
-	}
-	return interceptor(ctx, in, info, handler)
+	return srv.(Hospital_Server).GetPeers(m, &hospital_GetPeersServer{stream})
 }
 
-// Hospital_Server_ServiceDesc is the grpc.ServiceDesc for Hospital_Server service.
+type Hospital__GetPeersServer interface {
+	Send(*ClientID) error
+	grpc.ServerStream
+}
+
+type hospital_GetPeersServer struct {
+	grpc.ServerStream
+}
+
+func (x *hospital_GetPeersServer) Send(m *ClientID) error {
+	return x.ServerStream.SendMsg(m)
+}
+
+// Hospital__ServiceDesc is the grpc.ServiceDesc for Hospital_ service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
-var Hospital_Server_ServiceDesc = grpc.ServiceDesc{
-	ServiceName: "HospitalService.Hospital_Server",
-	HandlerType: (*Hospital_ServerServer)(nil),
+var Hospital__ServiceDesc = grpc.ServiceDesc{
+	ServiceName: "HospitalService.Hospital_",
+	HandlerType: (*Hospital_Server)(nil),
 	Methods: []grpc.MethodDesc{
 		{
 			MethodName: "NewConnection",
-			Handler:    _Hospital_Server_NewConnection_Handler,
-		},
-		{
-			MethodName: "CloseConnection",
-			Handler:    _Hospital_Server_CloseConnection_Handler,
+			Handler:    _Hospital__NewConnection_Handler,
 		},
 	},
-	Streams:  []grpc.StreamDesc{},
+	Streams: []grpc.StreamDesc{
+		{
+			StreamName:    "GetPeers",
+			Handler:       _Hospital__GetPeers_Handler,
+			ServerStreams: true,
+		},
+	},
 	Metadata: "HospitalService/HospitalService.proto",
 }
