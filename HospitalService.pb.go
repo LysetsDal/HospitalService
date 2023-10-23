@@ -2,7 +2,7 @@
 // versions:
 // 	protoc-gen-go v1.31.0
 // 	protoc        v4.24.4
-// source: HospitalService.proto
+// source: HospitalService/HospitalService.proto
 
 package proto
 
@@ -32,7 +32,7 @@ type MessageRequest struct {
 func (x *MessageRequest) Reset() {
 	*x = MessageRequest{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_HospitalService_proto_msgTypes[0]
+		mi := &file_HospitalService_HospitalService_proto_msgTypes[0]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -45,7 +45,7 @@ func (x *MessageRequest) String() string {
 func (*MessageRequest) ProtoMessage() {}
 
 func (x *MessageRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_HospitalService_proto_msgTypes[0]
+	mi := &file_HospitalService_HospitalService_proto_msgTypes[0]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -58,7 +58,7 @@ func (x *MessageRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use MessageRequest.ProtoReflect.Descriptor instead.
 func (*MessageRequest) Descriptor() ([]byte, []int) {
-	return file_HospitalService_proto_rawDescGZIP(), []int{0}
+	return file_HospitalService_HospitalService_proto_rawDescGZIP(), []int{0}
 }
 
 func (x *MessageRequest) GetFrom() string {
@@ -86,7 +86,7 @@ type MessageResponse struct {
 func (x *MessageResponse) Reset() {
 	*x = MessageResponse{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_HospitalService_proto_msgTypes[1]
+		mi := &file_HospitalService_HospitalService_proto_msgTypes[1]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -99,7 +99,7 @@ func (x *MessageResponse) String() string {
 func (*MessageResponse) ProtoMessage() {}
 
 func (x *MessageResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_HospitalService_proto_msgTypes[1]
+	mi := &file_HospitalService_HospitalService_proto_msgTypes[1]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -112,7 +112,7 @@ func (x *MessageResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use MessageResponse.ProtoReflect.Descriptor instead.
 func (*MessageResponse) Descriptor() ([]byte, []int) {
-	return file_HospitalService_proto_rawDescGZIP(), []int{1}
+	return file_HospitalService_HospitalService_proto_rawDescGZIP(), []int{1}
 }
 
 func (x *MessageResponse) GetAck() string {
@@ -122,7 +122,7 @@ func (x *MessageResponse) GetAck() string {
 	return ""
 }
 
-type PeerRequest struct {
+type ClientRequest struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
@@ -130,23 +130,23 @@ type PeerRequest struct {
 	Request string `protobuf:"bytes,1,opt,name=request,proto3" json:"request,omitempty"` // Could be used to send additional request parameters.
 }
 
-func (x *PeerRequest) Reset() {
-	*x = PeerRequest{}
+func (x *ClientRequest) Reset() {
+	*x = ClientRequest{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_HospitalService_proto_msgTypes[2]
+		mi := &file_HospitalService_HospitalService_proto_msgTypes[2]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
 }
 
-func (x *PeerRequest) String() string {
+func (x *ClientRequest) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*PeerRequest) ProtoMessage() {}
+func (*ClientRequest) ProtoMessage() {}
 
-func (x *PeerRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_HospitalService_proto_msgTypes[2]
+func (x *ClientRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_HospitalService_HospitalService_proto_msgTypes[2]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -157,43 +157,43 @@ func (x *PeerRequest) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use PeerRequest.ProtoReflect.Descriptor instead.
-func (*PeerRequest) Descriptor() ([]byte, []int) {
-	return file_HospitalService_proto_rawDescGZIP(), []int{2}
+// Deprecated: Use ClientRequest.ProtoReflect.Descriptor instead.
+func (*ClientRequest) Descriptor() ([]byte, []int) {
+	return file_HospitalService_HospitalService_proto_rawDescGZIP(), []int{2}
 }
 
-func (x *PeerRequest) GetRequest() string {
+func (x *ClientRequest) GetRequest() string {
 	if x != nil {
 		return x.Request
 	}
 	return ""
 }
 
-type PeerResponse struct {
+type ClientResponse struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Peers []string `protobuf:"bytes,1,rep,name=peers,proto3" json:"peers,omitempty"`
+	Clients []string `protobuf:"bytes,1,rep,name=clients,proto3" json:"clients,omitempty"`
 }
 
-func (x *PeerResponse) Reset() {
-	*x = PeerResponse{}
+func (x *ClientResponse) Reset() {
+	*x = ClientResponse{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_HospitalService_proto_msgTypes[3]
+		mi := &file_HospitalService_HospitalService_proto_msgTypes[3]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
 }
 
-func (x *PeerResponse) String() string {
+func (x *ClientResponse) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*PeerResponse) ProtoMessage() {}
+func (*ClientResponse) ProtoMessage() {}
 
-func (x *PeerResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_HospitalService_proto_msgTypes[3]
+func (x *ClientResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_HospitalService_HospitalService_proto_msgTypes[3]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -204,22 +204,23 @@ func (x *PeerResponse) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use PeerResponse.ProtoReflect.Descriptor instead.
-func (*PeerResponse) Descriptor() ([]byte, []int) {
-	return file_HospitalService_proto_rawDescGZIP(), []int{3}
+// Deprecated: Use ClientResponse.ProtoReflect.Descriptor instead.
+func (*ClientResponse) Descriptor() ([]byte, []int) {
+	return file_HospitalService_HospitalService_proto_rawDescGZIP(), []int{3}
 }
 
-func (x *PeerResponse) GetPeers() []string {
+func (x *ClientResponse) GetClients() []string {
 	if x != nil {
-		return x.Peers
+		return x.Clients
 	}
 	return nil
 }
 
-var File_HospitalService_proto protoreflect.FileDescriptor
+var File_HospitalService_HospitalService_proto protoreflect.FileDescriptor
 
-var file_HospitalService_proto_rawDesc = []byte{
-	0x0a, 0x15, 0x48, 0x6f, 0x73, 0x70, 0x69, 0x74, 0x61, 0x6c, 0x53, 0x65, 0x72, 0x76, 0x69, 0x63,
+var file_HospitalService_HospitalService_proto_rawDesc = []byte{
+	0x0a, 0x25, 0x48, 0x6f, 0x73, 0x70, 0x69, 0x74, 0x61, 0x6c, 0x53, 0x65, 0x72, 0x76, 0x69, 0x63,
+	0x65, 0x2f, 0x48, 0x6f, 0x73, 0x70, 0x69, 0x74, 0x61, 0x6c, 0x53, 0x65, 0x72, 0x76, 0x69, 0x63,
 	0x65, 0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x12, 0x08, 0x68, 0x6f, 0x73, 0x70, 0x69, 0x74, 0x61,
 	0x6c, 0x22, 0x3e, 0x0a, 0x0e, 0x4d, 0x65, 0x73, 0x73, 0x61, 0x67, 0x65, 0x52, 0x65, 0x71, 0x75,
 	0x65, 0x73, 0x74, 0x12, 0x12, 0x0a, 0x04, 0x66, 0x72, 0x6f, 0x6d, 0x18, 0x01, 0x20, 0x01, 0x28,
@@ -227,49 +228,50 @@ var file_HospitalService_proto_rawDesc = []byte{
 	0x61, 0x64, 0x18, 0x02, 0x20, 0x01, 0x28, 0x09, 0x52, 0x07, 0x70, 0x61, 0x79, 0x6c, 0x6f, 0x61,
 	0x64, 0x22, 0x23, 0x0a, 0x0f, 0x4d, 0x65, 0x73, 0x73, 0x61, 0x67, 0x65, 0x52, 0x65, 0x73, 0x70,
 	0x6f, 0x6e, 0x73, 0x65, 0x12, 0x10, 0x0a, 0x03, 0x61, 0x63, 0x6b, 0x18, 0x01, 0x20, 0x01, 0x28,
-	0x09, 0x52, 0x03, 0x61, 0x63, 0x6b, 0x22, 0x27, 0x0a, 0x0b, 0x50, 0x65, 0x65, 0x72, 0x52, 0x65,
-	0x71, 0x75, 0x65, 0x73, 0x74, 0x12, 0x18, 0x0a, 0x07, 0x72, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74,
-	0x18, 0x01, 0x20, 0x01, 0x28, 0x09, 0x52, 0x07, 0x72, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x22,
-	0x24, 0x0a, 0x0c, 0x50, 0x65, 0x65, 0x72, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x12,
-	0x14, 0x0a, 0x05, 0x70, 0x65, 0x65, 0x72, 0x73, 0x18, 0x01, 0x20, 0x03, 0x28, 0x09, 0x52, 0x05,
-	0x70, 0x65, 0x65, 0x72, 0x73, 0x32, 0x90, 0x01, 0x0a, 0x0f, 0x48, 0x6f, 0x73, 0x70, 0x69, 0x74,
-	0x61, 0x6c, 0x53, 0x65, 0x72, 0x76, 0x69, 0x63, 0x65, 0x12, 0x42, 0x0a, 0x0b, 0x53, 0x65, 0x6e,
-	0x64, 0x4d, 0x65, 0x73, 0x73, 0x61, 0x67, 0x65, 0x12, 0x18, 0x2e, 0x68, 0x6f, 0x73, 0x70, 0x69,
-	0x74, 0x61, 0x6c, 0x2e, 0x4d, 0x65, 0x73, 0x73, 0x61, 0x67, 0x65, 0x52, 0x65, 0x71, 0x75, 0x65,
-	0x73, 0x74, 0x1a, 0x19, 0x2e, 0x68, 0x6f, 0x73, 0x70, 0x69, 0x74, 0x61, 0x6c, 0x2e, 0x4d, 0x65,
-	0x73, 0x73, 0x61, 0x67, 0x65, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x12, 0x39, 0x0a,
-	0x08, 0x47, 0x65, 0x74, 0x50, 0x65, 0x65, 0x72, 0x73, 0x12, 0x15, 0x2e, 0x68, 0x6f, 0x73, 0x70,
-	0x69, 0x74, 0x61, 0x6c, 0x2e, 0x50, 0x65, 0x65, 0x72, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74,
-	0x1a, 0x16, 0x2e, 0x68, 0x6f, 0x73, 0x70, 0x69, 0x74, 0x61, 0x6c, 0x2e, 0x50, 0x65, 0x65, 0x72,
-	0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x42, 0x17, 0x5a, 0x15, 0x48, 0x6f, 0x73, 0x70,
-	0x69, 0x74, 0x61, 0x6c, 0x53, 0x65, 0x72, 0x76, 0x69, 0x63, 0x65, 0x2f, 0x70, 0x72, 0x6f, 0x74,
-	0x6f, 0x62, 0x06, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x33,
+	0x09, 0x52, 0x03, 0x61, 0x63, 0x6b, 0x22, 0x29, 0x0a, 0x0d, 0x43, 0x6c, 0x69, 0x65, 0x6e, 0x74,
+	0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x12, 0x18, 0x0a, 0x07, 0x72, 0x65, 0x71, 0x75, 0x65,
+	0x73, 0x74, 0x18, 0x01, 0x20, 0x01, 0x28, 0x09, 0x52, 0x07, 0x72, 0x65, 0x71, 0x75, 0x65, 0x73,
+	0x74, 0x22, 0x2a, 0x0a, 0x0e, 0x43, 0x6c, 0x69, 0x65, 0x6e, 0x74, 0x52, 0x65, 0x73, 0x70, 0x6f,
+	0x6e, 0x73, 0x65, 0x12, 0x18, 0x0a, 0x07, 0x63, 0x6c, 0x69, 0x65, 0x6e, 0x74, 0x73, 0x18, 0x01,
+	0x20, 0x03, 0x28, 0x09, 0x52, 0x07, 0x63, 0x6c, 0x69, 0x65, 0x6e, 0x74, 0x73, 0x32, 0x96, 0x01,
+	0x0a, 0x0f, 0x48, 0x6f, 0x73, 0x70, 0x69, 0x74, 0x61, 0x6c, 0x53, 0x65, 0x72, 0x76, 0x69, 0x63,
+	0x65, 0x12, 0x42, 0x0a, 0x0b, 0x53, 0x65, 0x6e, 0x64, 0x4d, 0x65, 0x73, 0x73, 0x61, 0x67, 0x65,
+	0x12, 0x18, 0x2e, 0x68, 0x6f, 0x73, 0x70, 0x69, 0x74, 0x61, 0x6c, 0x2e, 0x4d, 0x65, 0x73, 0x73,
+	0x61, 0x67, 0x65, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x1a, 0x19, 0x2e, 0x68, 0x6f, 0x73,
+	0x70, 0x69, 0x74, 0x61, 0x6c, 0x2e, 0x4d, 0x65, 0x73, 0x73, 0x61, 0x67, 0x65, 0x52, 0x65, 0x73,
+	0x70, 0x6f, 0x6e, 0x73, 0x65, 0x12, 0x3f, 0x0a, 0x0a, 0x47, 0x65, 0x74, 0x43, 0x6c, 0x69, 0x65,
+	0x6e, 0x74, 0x73, 0x12, 0x17, 0x2e, 0x68, 0x6f, 0x73, 0x70, 0x69, 0x74, 0x61, 0x6c, 0x2e, 0x43,
+	0x6c, 0x69, 0x65, 0x6e, 0x74, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x1a, 0x18, 0x2e, 0x68,
+	0x6f, 0x73, 0x70, 0x69, 0x74, 0x61, 0x6c, 0x2e, 0x43, 0x6c, 0x69, 0x65, 0x6e, 0x74, 0x52, 0x65,
+	0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x42, 0x17, 0x5a, 0x15, 0x48, 0x6f, 0x73, 0x70, 0x69, 0x74,
+	0x61, 0x6c, 0x53, 0x65, 0x72, 0x76, 0x69, 0x63, 0x65, 0x2f, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x62,
+	0x06, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x33,
 }
 
 var (
-	file_HospitalService_proto_rawDescOnce sync.Once
-	file_HospitalService_proto_rawDescData = file_HospitalService_proto_rawDesc
+	file_HospitalService_HospitalService_proto_rawDescOnce sync.Once
+	file_HospitalService_HospitalService_proto_rawDescData = file_HospitalService_HospitalService_proto_rawDesc
 )
 
-func file_HospitalService_proto_rawDescGZIP() []byte {
-	file_HospitalService_proto_rawDescOnce.Do(func() {
-		file_HospitalService_proto_rawDescData = protoimpl.X.CompressGZIP(file_HospitalService_proto_rawDescData)
+func file_HospitalService_HospitalService_proto_rawDescGZIP() []byte {
+	file_HospitalService_HospitalService_proto_rawDescOnce.Do(func() {
+		file_HospitalService_HospitalService_proto_rawDescData = protoimpl.X.CompressGZIP(file_HospitalService_HospitalService_proto_rawDescData)
 	})
-	return file_HospitalService_proto_rawDescData
+	return file_HospitalService_HospitalService_proto_rawDescData
 }
 
-var file_HospitalService_proto_msgTypes = make([]protoimpl.MessageInfo, 4)
-var file_HospitalService_proto_goTypes = []interface{}{
+var file_HospitalService_HospitalService_proto_msgTypes = make([]protoimpl.MessageInfo, 4)
+var file_HospitalService_HospitalService_proto_goTypes = []interface{}{
 	(*MessageRequest)(nil),  // 0: hospital.MessageRequest
 	(*MessageResponse)(nil), // 1: hospital.MessageResponse
-	(*PeerRequest)(nil),     // 2: hospital.PeerRequest
-	(*PeerResponse)(nil),    // 3: hospital.PeerResponse
+	(*ClientRequest)(nil),   // 2: hospital.ClientRequest
+	(*ClientResponse)(nil),  // 3: hospital.ClientResponse
 }
-var file_HospitalService_proto_depIdxs = []int32{
+var file_HospitalService_HospitalService_proto_depIdxs = []int32{
 	0, // 0: hospital.HospitalService.SendMessage:input_type -> hospital.MessageRequest
-	2, // 1: hospital.HospitalService.GetPeers:input_type -> hospital.PeerRequest
+	2, // 1: hospital.HospitalService.GetClients:input_type -> hospital.ClientRequest
 	1, // 2: hospital.HospitalService.SendMessage:output_type -> hospital.MessageResponse
-	3, // 3: hospital.HospitalService.GetPeers:output_type -> hospital.PeerResponse
+	3, // 3: hospital.HospitalService.GetClients:output_type -> hospital.ClientResponse
 	2, // [2:4] is the sub-list for method output_type
 	0, // [0:2] is the sub-list for method input_type
 	0, // [0:0] is the sub-list for extension type_name
@@ -277,13 +279,13 @@ var file_HospitalService_proto_depIdxs = []int32{
 	0, // [0:0] is the sub-list for field type_name
 }
 
-func init() { file_HospitalService_proto_init() }
-func file_HospitalService_proto_init() {
-	if File_HospitalService_proto != nil {
+func init() { file_HospitalService_HospitalService_proto_init() }
+func file_HospitalService_HospitalService_proto_init() {
+	if File_HospitalService_HospitalService_proto != nil {
 		return
 	}
 	if !protoimpl.UnsafeEnabled {
-		file_HospitalService_proto_msgTypes[0].Exporter = func(v interface{}, i int) interface{} {
+		file_HospitalService_HospitalService_proto_msgTypes[0].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*MessageRequest); i {
 			case 0:
 				return &v.state
@@ -295,7 +297,7 @@ func file_HospitalService_proto_init() {
 				return nil
 			}
 		}
-		file_HospitalService_proto_msgTypes[1].Exporter = func(v interface{}, i int) interface{} {
+		file_HospitalService_HospitalService_proto_msgTypes[1].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*MessageResponse); i {
 			case 0:
 				return &v.state
@@ -307,8 +309,8 @@ func file_HospitalService_proto_init() {
 				return nil
 			}
 		}
-		file_HospitalService_proto_msgTypes[2].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*PeerRequest); i {
+		file_HospitalService_HospitalService_proto_msgTypes[2].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*ClientRequest); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -319,8 +321,8 @@ func file_HospitalService_proto_init() {
 				return nil
 			}
 		}
-		file_HospitalService_proto_msgTypes[3].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*PeerResponse); i {
+		file_HospitalService_HospitalService_proto_msgTypes[3].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*ClientResponse); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -336,18 +338,18 @@ func file_HospitalService_proto_init() {
 	out := protoimpl.TypeBuilder{
 		File: protoimpl.DescBuilder{
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
-			RawDescriptor: file_HospitalService_proto_rawDesc,
+			RawDescriptor: file_HospitalService_HospitalService_proto_rawDesc,
 			NumEnums:      0,
 			NumMessages:   4,
 			NumExtensions: 0,
 			NumServices:   1,
 		},
-		GoTypes:           file_HospitalService_proto_goTypes,
-		DependencyIndexes: file_HospitalService_proto_depIdxs,
-		MessageInfos:      file_HospitalService_proto_msgTypes,
+		GoTypes:           file_HospitalService_HospitalService_proto_goTypes,
+		DependencyIndexes: file_HospitalService_HospitalService_proto_depIdxs,
+		MessageInfos:      file_HospitalService_HospitalService_proto_msgTypes,
 	}.Build()
-	File_HospitalService_proto = out.File
-	file_HospitalService_proto_rawDesc = nil
-	file_HospitalService_proto_goTypes = nil
-	file_HospitalService_proto_depIdxs = nil
+	File_HospitalService_HospitalService_proto = out.File
+	file_HospitalService_HospitalService_proto_rawDesc = nil
+	file_HospitalService_HospitalService_proto_goTypes = nil
+	file_HospitalService_HospitalService_proto_depIdxs = nil
 }

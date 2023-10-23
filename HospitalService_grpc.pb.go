@@ -2,7 +2,7 @@
 // versions:
 // - protoc-gen-go-grpc v1.3.0
 // - protoc             v4.24.4
-// source: HospitalService.proto
+// source: HospitalService/HospitalService.proto
 
 package proto
 
@@ -20,7 +20,7 @@ const _ = grpc.SupportPackageIsVersion7
 
 const (
 	HospitalService_SendMessage_FullMethodName = "/hospital.HospitalService/SendMessage"
-	HospitalService_GetPeers_FullMethodName    = "/hospital.HospitalService/GetPeers"
+	HospitalService_GetClients_FullMethodName  = "/hospital.HospitalService/GetClients"
 )
 
 // HospitalServiceClient is the client API for HospitalService service.
@@ -28,7 +28,7 @@ const (
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type HospitalServiceClient interface {
 	SendMessage(ctx context.Context, in *MessageRequest, opts ...grpc.CallOption) (*MessageResponse, error)
-	GetPeers(ctx context.Context, in *PeerRequest, opts ...grpc.CallOption) (*PeerResponse, error)
+	GetClients(ctx context.Context, in *ClientRequest, opts ...grpc.CallOption) (*ClientResponse, error)
 }
 
 type hospitalServiceClient struct {
@@ -48,9 +48,9 @@ func (c *hospitalServiceClient) SendMessage(ctx context.Context, in *MessageRequ
 	return out, nil
 }
 
-func (c *hospitalServiceClient) GetPeers(ctx context.Context, in *PeerRequest, opts ...grpc.CallOption) (*PeerResponse, error) {
-	out := new(PeerResponse)
-	err := c.cc.Invoke(ctx, HospitalService_GetPeers_FullMethodName, in, out, opts...)
+func (c *hospitalServiceClient) GetClients(ctx context.Context, in *ClientRequest, opts ...grpc.CallOption) (*ClientResponse, error) {
+	out := new(ClientResponse)
+	err := c.cc.Invoke(ctx, HospitalService_GetClients_FullMethodName, in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -62,7 +62,7 @@ func (c *hospitalServiceClient) GetPeers(ctx context.Context, in *PeerRequest, o
 // for forward compatibility
 type HospitalServiceServer interface {
 	SendMessage(context.Context, *MessageRequest) (*MessageResponse, error)
-	GetPeers(context.Context, *PeerRequest) (*PeerResponse, error)
+	GetClients(context.Context, *ClientRequest) (*ClientResponse, error)
 	mustEmbedUnimplementedHospitalServiceServer()
 }
 
@@ -73,8 +73,8 @@ type UnimplementedHospitalServiceServer struct {
 func (UnimplementedHospitalServiceServer) SendMessage(context.Context, *MessageRequest) (*MessageResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method SendMessage not implemented")
 }
-func (UnimplementedHospitalServiceServer) GetPeers(context.Context, *PeerRequest) (*PeerResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method GetPeers not implemented")
+func (UnimplementedHospitalServiceServer) GetClients(context.Context, *ClientRequest) (*ClientResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetClients not implemented")
 }
 func (UnimplementedHospitalServiceServer) mustEmbedUnimplementedHospitalServiceServer() {}
 
@@ -107,20 +107,20 @@ func _HospitalService_SendMessage_Handler(srv interface{}, ctx context.Context, 
 	return interceptor(ctx, in, info, handler)
 }
 
-func _HospitalService_GetPeers_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(PeerRequest)
+func _HospitalService_GetClients_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ClientRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(HospitalServiceServer).GetPeers(ctx, in)
+		return srv.(HospitalServiceServer).GetClients(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: HospitalService_GetPeers_FullMethodName,
+		FullMethod: HospitalService_GetClients_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(HospitalServiceServer).GetPeers(ctx, req.(*PeerRequest))
+		return srv.(HospitalServiceServer).GetClients(ctx, req.(*ClientRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -137,10 +137,10 @@ var HospitalService_ServiceDesc = grpc.ServiceDesc{
 			Handler:    _HospitalService_SendMessage_Handler,
 		},
 		{
-			MethodName: "GetPeers",
-			Handler:    _HospitalService_GetPeers_Handler,
+			MethodName: "GetClients",
+			Handler:    _HospitalService_GetClients_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
-	Metadata: "HospitalService.proto",
+	Metadata: "HospitalService/HospitalService.proto",
 }

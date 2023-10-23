@@ -20,7 +20,7 @@ protoc --go_out=. --go_opt=paths=source_relative --go-grpc_out=. \
 // HOSPITAL SERVER INTERFACE
 service HospitalService {
     rpc SendMessage(MessageRequest) returns (MessageResponse);
-    rpc GetPeers(PeerRequest) returns (PeerResponse);
+    rpc GetClients(ClientRequest) returns (ClientResponse);
 }
 
 message MessageRequest {
@@ -32,10 +32,10 @@ message MessageResponse {
     string ack = 1;
 }
 
-message PeerRequest {
+message ClientRequest {
     string request = 1;  // Could be used to send additional request parameters.
 }
 
-message PeerResponse {
-    repeated string peers = 1;
+message ClientResponse {
+    repeated string clients = 1;
 }
