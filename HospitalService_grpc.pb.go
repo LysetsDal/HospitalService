@@ -19,8 +19,9 @@ import (
 const _ = grpc.SupportPackageIsVersion7
 
 const (
-	HospitalService_SendMessage_FullMethodName = "/hospital.HospitalService/SendMessage"
-	HospitalService_GetClients_FullMethodName  = "/hospital.HospitalService/GetClients"
+	HospitalService_SendMessage_FullMethodName          = "/hospital.HospitalService/SendMessage"
+	HospitalService_GetClients_FullMethodName           = "/hospital.HospitalService/GetClients"
+	HospitalService_GetActiveConnections_FullMethodName = "/hospital.HospitalService/GetActiveConnections"
 )
 
 // HospitalServiceClient is the client API for HospitalService service.
@@ -29,6 +30,7 @@ const (
 type HospitalServiceClient interface {
 	SendMessage(ctx context.Context, in *MessageReq, opts ...grpc.CallOption) (*MessageRes, error)
 	GetClients(ctx context.Context, in *GetClientsReq, opts ...grpc.CallOption) (*ClientListRes, error)
+	GetActiveConnections(ctx context.Context, in *EmptyReq, opts ...grpc.CallOption) (*ClientListRes, error)
 }
 
 type hospitalServiceClient struct {
@@ -57,12 +59,22 @@ func (c *hospitalServiceClient) GetClients(ctx context.Context, in *GetClientsRe
 	return out, nil
 }
 
+func (c *hospitalServiceClient) GetActiveConnections(ctx context.Context, in *EmptyReq, opts ...grpc.CallOption) (*ClientListRes, error) {
+	out := new(ClientListRes)
+	err := c.cc.Invoke(ctx, HospitalService_GetActiveConnections_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // HospitalServiceServer is the server API for HospitalService service.
 // All implementations must embed UnimplementedHospitalServiceServer
 // for forward compatibility
 type HospitalServiceServer interface {
 	SendMessage(context.Context, *MessageReq) (*MessageRes, error)
 	GetClients(context.Context, *GetClientsReq) (*ClientListRes, error)
+	GetActiveConnections(context.Context, *EmptyReq) (*ClientListRes, error)
 	mustEmbedUnimplementedHospitalServiceServer()
 }
 
@@ -75,6 +87,9 @@ func (UnimplementedHospitalServiceServer) SendMessage(context.Context, *MessageR
 }
 func (UnimplementedHospitalServiceServer) GetClients(context.Context, *GetClientsReq) (*ClientListRes, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetClients not implemented")
+}
+func (UnimplementedHospitalServiceServer) GetActiveConnections(context.Context, *EmptyReq) (*ClientListRes, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetActiveConnections not implemented")
 }
 func (UnimplementedHospitalServiceServer) mustEmbedUnimplementedHospitalServiceServer() {}
 
@@ -125,6 +140,24 @@ func _HospitalService_GetClients_Handler(srv interface{}, ctx context.Context, d
 	return interceptor(ctx, in, info, handler)
 }
 
+func _HospitalService_GetActiveConnections_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(EmptyReq)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(HospitalServiceServer).GetActiveConnections(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: HospitalService_GetActiveConnections_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(HospitalServiceServer).GetActiveConnections(ctx, req.(*EmptyReq))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // HospitalService_ServiceDesc is the grpc.ServiceDesc for HospitalService service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -139,6 +172,10 @@ var HospitalService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "GetClients",
 			Handler:    _HospitalService_GetClients_Handler,
+		},
+		{
+			MethodName: "GetActiveConnections",
+			Handler:    _HospitalService_GetActiveConnections_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
