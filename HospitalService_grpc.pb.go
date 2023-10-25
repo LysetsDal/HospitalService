@@ -2,7 +2,7 @@
 // versions:
 // - protoc-gen-go-grpc v1.3.0
 // - protoc             v4.24.4
-// source: HospitalService.proto
+// source: HospitalService/HospitalService.proto
 
 package proto
 
@@ -253,5 +253,5 @@ var HospitalService_ServiceDesc = grpc.ServiceDesc{
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
-	Metadata: "HospitalService.proto",
+	Metadata: "HospitalService/HospitalService.proto",
 }
