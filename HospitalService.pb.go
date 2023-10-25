@@ -2,7 +2,7 @@
 // versions:
 // 	protoc-gen-go v1.31.0
 // 	protoc        v4.24.4
-// source: HospitalService/HospitalService.proto
+// source: HospitalService.proto
 
 package proto
 
@@ -32,7 +32,7 @@ type MessageReq struct {
 func (x *MessageReq) Reset() {
 	*x = MessageReq{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_HospitalService_HospitalService_proto_msgTypes[0]
+		mi := &file_HospitalService_proto_msgTypes[0]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -45,7 +45,7 @@ func (x *MessageReq) String() string {
 func (*MessageReq) ProtoMessage() {}
 
 func (x *MessageReq) ProtoReflect() protoreflect.Message {
-	mi := &file_HospitalService_HospitalService_proto_msgTypes[0]
+	mi := &file_HospitalService_proto_msgTypes[0]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -58,7 +58,7 @@ func (x *MessageReq) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use MessageReq.ProtoReflect.Descriptor instead.
 func (*MessageReq) Descriptor() ([]byte, []int) {
-	return file_HospitalService_HospitalService_proto_rawDescGZIP(), []int{0}
+	return file_HospitalService_proto_rawDescGZIP(), []int{0}
 }
 
 func (x *MessageReq) GetFrom() string {
@@ -86,7 +86,7 @@ type MessageRes struct {
 func (x *MessageRes) Reset() {
 	*x = MessageRes{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_HospitalService_HospitalService_proto_msgTypes[1]
+		mi := &file_HospitalService_proto_msgTypes[1]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -99,7 +99,7 @@ func (x *MessageRes) String() string {
 func (*MessageRes) ProtoMessage() {}
 
 func (x *MessageRes) ProtoReflect() protoreflect.Message {
-	mi := &file_HospitalService_HospitalService_proto_msgTypes[1]
+	mi := &file_HospitalService_proto_msgTypes[1]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -112,7 +112,7 @@ func (x *MessageRes) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use MessageRes.ProtoReflect.Descriptor instead.
 func (*MessageRes) Descriptor() ([]byte, []int) {
-	return file_HospitalService_HospitalService_proto_rawDescGZIP(), []int{1}
+	return file_HospitalService_proto_rawDescGZIP(), []int{1}
 }
 
 func (x *MessageRes) GetRes() string {
@@ -133,7 +133,7 @@ type GetClientsReq struct {
 func (x *GetClientsReq) Reset() {
 	*x = GetClientsReq{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_HospitalService_HospitalService_proto_msgTypes[2]
+		mi := &file_HospitalService_proto_msgTypes[2]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -146,7 +146,7 @@ func (x *GetClientsReq) String() string {
 func (*GetClientsReq) ProtoMessage() {}
 
 func (x *GetClientsReq) ProtoReflect() protoreflect.Message {
-	mi := &file_HospitalService_HospitalService_proto_msgTypes[2]
+	mi := &file_HospitalService_proto_msgTypes[2]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -159,7 +159,7 @@ func (x *GetClientsReq) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetClientsReq.ProtoReflect.Descriptor instead.
 func (*GetClientsReq) Descriptor() ([]byte, []int) {
-	return file_HospitalService_HospitalService_proto_rawDescGZIP(), []int{2}
+	return file_HospitalService_proto_rawDescGZIP(), []int{2}
 }
 
 func (x *GetClientsReq) GetRequest() string {
@@ -180,7 +180,7 @@ type ClientListRes struct {
 func (x *ClientListRes) Reset() {
 	*x = ClientListRes{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_HospitalService_HospitalService_proto_msgTypes[3]
+		mi := &file_HospitalService_proto_msgTypes[3]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -193,7 +193,7 @@ func (x *ClientListRes) String() string {
 func (*ClientListRes) ProtoMessage() {}
 
 func (x *ClientListRes) ProtoReflect() protoreflect.Message {
-	mi := &file_HospitalService_HospitalService_proto_msgTypes[3]
+	mi := &file_HospitalService_proto_msgTypes[3]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -206,7 +206,7 @@ func (x *ClientListRes) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ClientListRes.ProtoReflect.Descriptor instead.
 func (*ClientListRes) Descriptor() ([]byte, []int) {
-	return file_HospitalService_HospitalService_proto_rawDescGZIP(), []int{3}
+	return file_HospitalService_proto_rawDescGZIP(), []int{3}
 }
 
 func (x *ClientListRes) GetClients() []string {
@@ -227,7 +227,7 @@ type ClientIDsList struct {
 func (x *ClientIDsList) Reset() {
 	*x = ClientIDsList{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_HospitalService_HospitalService_proto_msgTypes[4]
+		mi := &file_HospitalService_proto_msgTypes[4]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -240,7 +240,7 @@ func (x *ClientIDsList) String() string {
 func (*ClientIDsList) ProtoMessage() {}
 
 func (x *ClientIDsList) ProtoReflect() protoreflect.Message {
-	mi := &file_HospitalService_HospitalService_proto_msgTypes[4]
+	mi := &file_HospitalService_proto_msgTypes[4]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -253,7 +253,7 @@ func (x *ClientIDsList) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ClientIDsList.ProtoReflect.Descriptor instead.
 func (*ClientIDsList) Descriptor() ([]byte, []int) {
-	return file_HospitalService_HospitalService_proto_rawDescGZIP(), []int{4}
+	return file_HospitalService_proto_rawDescGZIP(), []int{4}
 }
 
 func (x *ClientIDsList) GetUuids() []string {
@@ -272,7 +272,7 @@ type EmptyReq struct {
 func (x *EmptyReq) Reset() {
 	*x = EmptyReq{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_HospitalService_HospitalService_proto_msgTypes[5]
+		mi := &file_HospitalService_proto_msgTypes[5]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -285,7 +285,7 @@ func (x *EmptyReq) String() string {
 func (*EmptyReq) ProtoMessage() {}
 
 func (x *EmptyReq) ProtoReflect() protoreflect.Message {
-	mi := &file_HospitalService_HospitalService_proto_msgTypes[5]
+	mi := &file_HospitalService_proto_msgTypes[5]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -298,14 +298,13 @@ func (x *EmptyReq) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use EmptyReq.ProtoReflect.Descriptor instead.
 func (*EmptyReq) Descriptor() ([]byte, []int) {
-	return file_HospitalService_HospitalService_proto_rawDescGZIP(), []int{5}
+	return file_HospitalService_proto_rawDescGZIP(), []int{5}
 }
 
-var File_HospitalService_HospitalService_proto protoreflect.FileDescriptor
+var File_HospitalService_proto protoreflect.FileDescriptor
 
-var file_HospitalService_HospitalService_proto_rawDesc = []byte{
-	0x0a, 0x25, 0x48, 0x6f, 0x73, 0x70, 0x69, 0x74, 0x61, 0x6c, 0x53, 0x65, 0x72, 0x76, 0x69, 0x63,
-	0x65, 0x2f, 0x48, 0x6f, 0x73, 0x70, 0x69, 0x74, 0x61, 0x6c, 0x53, 0x65, 0x72, 0x76, 0x69, 0x63,
+var file_HospitalService_proto_rawDesc = []byte{
+	0x0a, 0x15, 0x48, 0x6f, 0x73, 0x70, 0x69, 0x74, 0x61, 0x6c, 0x53, 0x65, 0x72, 0x76, 0x69, 0x63,
 	0x65, 0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x12, 0x08, 0x68, 0x6f, 0x73, 0x70, 0x69, 0x74, 0x61,
 	0x6c, 0x22, 0x3a, 0x0a, 0x0a, 0x4d, 0x65, 0x73, 0x73, 0x61, 0x67, 0x65, 0x52, 0x65, 0x71, 0x12,
 	0x12, 0x0a, 0x04, 0x66, 0x72, 0x6f, 0x6d, 0x18, 0x01, 0x20, 0x01, 0x28, 0x09, 0x52, 0x04, 0x66,
@@ -345,19 +344,19 @@ var file_HospitalService_HospitalService_proto_rawDesc = []byte{
 }
 
 var (
-	file_HospitalService_HospitalService_proto_rawDescOnce sync.Once
-	file_HospitalService_HospitalService_proto_rawDescData = file_HospitalService_HospitalService_proto_rawDesc
+	file_HospitalService_proto_rawDescOnce sync.Once
+	file_HospitalService_proto_rawDescData = file_HospitalService_proto_rawDesc
 )
 
-func file_HospitalService_HospitalService_proto_rawDescGZIP() []byte {
-	file_HospitalService_HospitalService_proto_rawDescOnce.Do(func() {
-		file_HospitalService_HospitalService_proto_rawDescData = protoimpl.X.CompressGZIP(file_HospitalService_HospitalService_proto_rawDescData)
+func file_HospitalService_proto_rawDescGZIP() []byte {
+	file_HospitalService_proto_rawDescOnce.Do(func() {
+		file_HospitalService_proto_rawDescData = protoimpl.X.CompressGZIP(file_HospitalService_proto_rawDescData)
 	})
-	return file_HospitalService_HospitalService_proto_rawDescData
+	return file_HospitalService_proto_rawDescData
 }
 
-var file_HospitalService_HospitalService_proto_msgTypes = make([]protoimpl.MessageInfo, 6)
-var file_HospitalService_HospitalService_proto_goTypes = []interface{}{
+var file_HospitalService_proto_msgTypes = make([]protoimpl.MessageInfo, 6)
+var file_HospitalService_proto_goTypes = []interface{}{
 	(*MessageReq)(nil),    // 0: hospital.MessageReq
 	(*MessageRes)(nil),    // 1: hospital.MessageRes
 	(*GetClientsReq)(nil), // 2: hospital.GetClientsReq
@@ -365,7 +364,7 @@ var file_HospitalService_HospitalService_proto_goTypes = []interface{}{
 	(*ClientIDsList)(nil), // 4: hospital.ClientIDsList
 	(*EmptyReq)(nil),      // 5: hospital.EmptyReq
 }
-var file_HospitalService_HospitalService_proto_depIdxs = []int32{
+var file_HospitalService_proto_depIdxs = []int32{
 	0, // 0: hospital.HospitalService.SendMessage:input_type -> hospital.MessageReq
 	2, // 1: hospital.HospitalService.GetClients:input_type -> hospital.GetClientsReq
 	5, // 2: hospital.HospitalService.GetActiveConnections:input_type -> hospital.EmptyReq
@@ -381,13 +380,13 @@ var file_HospitalService_HospitalService_proto_depIdxs = []int32{
 	0, // [0:0] is the sub-list for field type_name
 }
 
-func init() { file_HospitalService_HospitalService_proto_init() }
-func file_HospitalService_HospitalService_proto_init() {
-	if File_HospitalService_HospitalService_proto != nil {
+func init() { file_HospitalService_proto_init() }
+func file_HospitalService_proto_init() {
+	if File_HospitalService_proto != nil {
 		return
 	}
 	if !protoimpl.UnsafeEnabled {
-		file_HospitalService_HospitalService_proto_msgTypes[0].Exporter = func(v interface{}, i int) interface{} {
+		file_HospitalService_proto_msgTypes[0].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*MessageReq); i {
 			case 0:
 				return &v.state
@@ -399,7 +398,7 @@ func file_HospitalService_HospitalService_proto_init() {
 				return nil
 			}
 		}
-		file_HospitalService_HospitalService_proto_msgTypes[1].Exporter = func(v interface{}, i int) interface{} {
+		file_HospitalService_proto_msgTypes[1].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*MessageRes); i {
 			case 0:
 				return &v.state
@@ -411,7 +410,7 @@ func file_HospitalService_HospitalService_proto_init() {
 				return nil
 			}
 		}
-		file_HospitalService_HospitalService_proto_msgTypes[2].Exporter = func(v interface{}, i int) interface{} {
+		file_HospitalService_proto_msgTypes[2].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*GetClientsReq); i {
 			case 0:
 				return &v.state
@@ -423,7 +422,7 @@ func file_HospitalService_HospitalService_proto_init() {
 				return nil
 			}
 		}
-		file_HospitalService_HospitalService_proto_msgTypes[3].Exporter = func(v interface{}, i int) interface{} {
+		file_HospitalService_proto_msgTypes[3].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*ClientListRes); i {
 			case 0:
 				return &v.state
@@ -435,7 +434,7 @@ func file_HospitalService_HospitalService_proto_init() {
 				return nil
 			}
 		}
-		file_HospitalService_HospitalService_proto_msgTypes[4].Exporter = func(v interface{}, i int) interface{} {
+		file_HospitalService_proto_msgTypes[4].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*ClientIDsList); i {
 			case 0:
 				return &v.state
@@ -447,7 +446,7 @@ func file_HospitalService_HospitalService_proto_init() {
 				return nil
 			}
 		}
-		file_HospitalService_HospitalService_proto_msgTypes[5].Exporter = func(v interface{}, i int) interface{} {
+		file_HospitalService_proto_msgTypes[5].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*EmptyReq); i {
 			case 0:
 				return &v.state
@@ -464,18 +463,18 @@ func file_HospitalService_HospitalService_proto_init() {
 	out := protoimpl.TypeBuilder{
 		File: protoimpl.DescBuilder{
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
-			RawDescriptor: file_HospitalService_HospitalService_proto_rawDesc,
+			RawDescriptor: file_HospitalService_proto_rawDesc,
 			NumEnums:      0,
 			NumMessages:   6,
 			NumExtensions: 0,
 			NumServices:   1,
 		},
-		GoTypes:           file_HospitalService_HospitalService_proto_goTypes,
-		DependencyIndexes: file_HospitalService_HospitalService_proto_depIdxs,
-		MessageInfos:      file_HospitalService_HospitalService_proto_msgTypes,
+		GoTypes:           file_HospitalService_proto_goTypes,
+		DependencyIndexes: file_HospitalService_proto_depIdxs,
+		MessageInfos:      file_HospitalService_proto_msgTypes,
 	}.Build()
-	File_HospitalService_HospitalService_proto = out.File
-	file_HospitalService_HospitalService_proto_rawDesc = nil
-	file_HospitalService_HospitalService_proto_goTypes = nil
-	file_HospitalService_HospitalService_proto_depIdxs = nil
+	File_HospitalService_proto = out.File
+	file_HospitalService_proto_rawDesc = nil
+	file_HospitalService_proto_goTypes = nil
+	file_HospitalService_proto_depIdxs = nil
 }
