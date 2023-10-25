@@ -14,7 +14,7 @@ service HospitalService {
     rpc GetClients(GetClientsReq) returns (ClientListRes) {}
     rpc GetClientIDs(MessageReq) returns (ClientIDsList) {}
     rpc RegisterClient(RegisterReq) returns (RegisterRes) {}
-    rpc TestCall(EmptyReq) returns (TestSuccess) {}
+    rpc TestCall(EmptyReq) returns (TestCallRes) {}
 }
 
 message MessageReq {
@@ -46,7 +46,7 @@ message RegisterRes {
     bool success = 1;
 }
 
-message TestSuccess {
+message TestCallRes {
     bool worked = 1;
 }
 

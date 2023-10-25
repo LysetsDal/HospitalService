@@ -34,7 +34,7 @@ type HospitalServiceClient interface {
 	GetClients(ctx context.Context, in *GetClientsReq, opts ...grpc.CallOption) (*ClientListRes, error)
 	GetClientIDs(ctx context.Context, in *MessageReq, opts ...grpc.CallOption) (*ClientIDsList, error)
 	RegisterClient(ctx context.Context, in *RegisterReq, opts ...grpc.CallOption) (*RegisterRes, error)
-	TestCall(ctx context.Context, in *EmptyReq, opts ...grpc.CallOption) (*TestSuccess, error)
+	TestCall(ctx context.Context, in *EmptyReq, opts ...grpc.CallOption) (*TestCallRes, error)
 }
 
 type hospitalServiceClient struct {
@@ -81,8 +81,8 @@ func (c *hospitalServiceClient) RegisterClient(ctx context.Context, in *Register
 	return out, nil
 }
 
-func (c *hospitalServiceClient) TestCall(ctx context.Context, in *EmptyReq, opts ...grpc.CallOption) (*TestSuccess, error) {
-	out := new(TestSuccess)
+func (c *hospitalServiceClient) TestCall(ctx context.Context, in *EmptyReq, opts ...grpc.CallOption) (*TestCallRes, error) {
+	out := new(TestCallRes)
 	err := c.cc.Invoke(ctx, HospitalService_TestCall_FullMethodName, in, out, opts...)
 	if err != nil {
 		return nil, err
@@ -98,7 +98,7 @@ type HospitalServiceServer interface {
 	GetClients(context.Context, *GetClientsReq) (*ClientListRes, error)
 	GetClientIDs(context.Context, *MessageReq) (*ClientIDsList, error)
 	RegisterClient(context.Context, *RegisterReq) (*RegisterRes, error)
-	TestCall(context.Context, *EmptyReq) (*TestSuccess, error)
+	TestCall(context.Context, *EmptyReq) (*TestCallRes, error)
 	mustEmbedUnimplementedHospitalServiceServer()
 }
 
@@ -118,7 +118,7 @@ func (UnimplementedHospitalServiceServer) GetClientIDs(context.Context, *Message
 func (UnimplementedHospitalServiceServer) RegisterClient(context.Context, *RegisterReq) (*RegisterRes, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method RegisterClient not implemented")
 }
-func (UnimplementedHospitalServiceServer) TestCall(context.Context, *EmptyReq) (*TestSuccess, error) {
+func (UnimplementedHospitalServiceServer) TestCall(context.Context, *EmptyReq) (*TestCallRes, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method TestCall not implemented")
 }
 func (UnimplementedHospitalServiceServer) mustEmbedUnimplementedHospitalServiceServer() {}
