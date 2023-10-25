@@ -45,4 +45,8 @@ message RegisterRes {
     bool success = 1;
 }
 
+message TestSuccess {
+    bool worked = 1;
+}
+
 message EmptyReq {}
