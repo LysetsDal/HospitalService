@@ -34,7 +34,7 @@ message ClientListRes {
 }
 
 message ClientIDsList {
-    repeated string uuid = 1;
+    repeated string uuids = 1;
 }
 
 message EmptyReq {}
