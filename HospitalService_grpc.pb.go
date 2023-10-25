@@ -23,6 +23,7 @@ const (
 	HospitalService_GetClients_FullMethodName     = "/hospital.HospitalService/GetClients"
 	HospitalService_GetClientIDs_FullMethodName   = "/hospital.HospitalService/GetClientIDs"
 	HospitalService_RegisterClient_FullMethodName = "/hospital.HospitalService/RegisterClient"
+	HospitalService_TestCall_FullMethodName       = "/hospital.HospitalService/TestCall"
 )
 
 // HospitalServiceClient is the client API for HospitalService service.
@@ -33,6 +34,7 @@ type HospitalServiceClient interface {
 	GetClients(ctx context.Context, in *GetClientsReq, opts ...grpc.CallOption) (*ClientListRes, error)
 	GetClientIDs(ctx context.Context, in *MessageReq, opts ...grpc.CallOption) (*ClientIDsList, error)
 	RegisterClient(ctx context.Context, in *RegisterReq, opts ...grpc.CallOption) (*RegisterRes, error)
+	TestCall(ctx context.Context, in *EmptyReq, opts ...grpc.CallOption) (*TestSuccess, error)
 }
 
 type hospitalServiceClient struct {
@@ -79,6 +81,15 @@ func (c *hospitalServiceClient) RegisterClient(ctx context.Context, in *Register
 	return out, nil
 }
 
+func (c *hospitalServiceClient) TestCall(ctx context.Context, in *EmptyReq, opts ...grpc.CallOption) (*TestSuccess, error) {
+	out := new(TestSuccess)
+	err := c.cc.Invoke(ctx, HospitalService_TestCall_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // HospitalServiceServer is the server API for HospitalService service.
 // All implementations must embed UnimplementedHospitalServiceServer
 // for forward compatibility
@@ -87,6 +98,7 @@ type HospitalServiceServer interface {
 	GetClients(context.Context, *GetClientsReq) (*ClientListRes, error)
 	GetClientIDs(context.Context, *MessageReq) (*ClientIDsList, error)
 	RegisterClient(context.Context, *RegisterReq) (*RegisterRes, error)
+	TestCall(context.Context, *EmptyReq) (*TestSuccess, error)
 	mustEmbedUnimplementedHospitalServiceServer()
 }
 
@@ -105,6 +117,9 @@ func (UnimplementedHospitalServiceServer) GetClientIDs(context.Context, *Message
 }
 func (UnimplementedHospitalServiceServer) RegisterClient(context.Context, *RegisterReq) (*RegisterRes, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method RegisterClient not implemented")
+}
+func (UnimplementedHospitalServiceServer) TestCall(context.Context, *EmptyReq) (*TestSuccess, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method TestCall not implemented")
 }
 func (UnimplementedHospitalServiceServer) mustEmbedUnimplementedHospitalServiceServer() {}
 
@@ -191,6 +206,24 @@ func _HospitalService_RegisterClient_Handler(srv interface{}, ctx context.Contex
 	return interceptor(ctx, in, info, handler)
 }
 
+func _HospitalService_TestCall_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(EmptyReq)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(HospitalServiceServer).TestCall(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: HospitalService_TestCall_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(HospitalServiceServer).TestCall(ctx, req.(*EmptyReq))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // HospitalService_ServiceDesc is the grpc.ServiceDesc for HospitalService service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -213,6 +246,10 @@ var HospitalService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "RegisterClient",
 			Handler:    _HospitalService_RegisterClient_Handler,
+		},
+		{
+			MethodName: "TestCall",
+			Handler:    _HospitalService_TestCall_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

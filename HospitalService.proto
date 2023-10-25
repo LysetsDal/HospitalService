@@ -14,6 +14,7 @@ service HospitalService {
     rpc GetClients(GetClientsReq) returns (ClientListRes) {}
     rpc GetClientIDs(MessageReq) returns (ClientIDsList) {}
     rpc RegisterClient(RegisterReq) returns (RegisterRes) {}
+    rpc TestCall(EmptyReq) returns (TestSuccess) {}
 }
 
 message MessageReq {
