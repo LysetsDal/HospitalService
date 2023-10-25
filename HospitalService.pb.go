@@ -127,7 +127,7 @@ type GetClientsReq struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Request string `protobuf:"bytes,1,opt,name=request,proto3" json:"request,omitempty"` // Could be used to send additional request parameters.
+	Request string `protobuf:"bytes,1,opt,name=request,proto3" json:"request,omitempty"`
 }
 
 func (x *GetClientsReq) Reset() {
