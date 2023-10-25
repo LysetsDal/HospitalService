@@ -13,7 +13,7 @@ service HospitalService {
     rpc SendMessage(MessageReq) returns (MessageRes) {}
     rpc GetClients(GetClientsReq) returns (ClientListRes) {}
     rpc GetActiveConnections(EmptyReq) returns (ClientListRes) {}
-    rpc GetClientIDs(MessageReq) returns (ClientListRes) {}
+    rpc GetClientIDs(MessageReq) returns (ClientIDsList) {}
 }
 
 message MessageReq {

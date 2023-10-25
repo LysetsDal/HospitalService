@@ -32,7 +32,7 @@ type HospitalServiceClient interface {
 	SendMessage(ctx context.Context, in *MessageReq, opts ...grpc.CallOption) (*MessageRes, error)
 	GetClients(ctx context.Context, in *GetClientsReq, opts ...grpc.CallOption) (*ClientListRes, error)
 	GetActiveConnections(ctx context.Context, in *EmptyReq, opts ...grpc.CallOption) (*ClientListRes, error)
-	GetClientIDs(ctx context.Context, in *MessageReq, opts ...grpc.CallOption) (*ClientListRes, error)
+	GetClientIDs(ctx context.Context, in *MessageReq, opts ...grpc.CallOption) (*ClientIDsList, error)
 }
 
 type hospitalServiceClient struct {
@@ -70,8 +70,8 @@ func (c *hospitalServiceClient) GetActiveConnections(ctx context.Context, in *Em
 	return out, nil
 }
 
-func (c *hospitalServiceClient) GetClientIDs(ctx context.Context, in *MessageReq, opts ...grpc.CallOption) (*ClientListRes, error) {
-	out := new(ClientListRes)
+func (c *hospitalServiceClient) GetClientIDs(ctx context.Context, in *MessageReq, opts ...grpc.CallOption) (*ClientIDsList, error) {
+	out := new(ClientIDsList)
 	err := c.cc.Invoke(ctx, HospitalService_GetClientIDs_FullMethodName, in, out, opts...)
 	if err != nil {
 		return nil, err
@@ -86,7 +86,7 @@ type HospitalServiceServer interface {
 	SendMessage(context.Context, *MessageReq) (*MessageRes, error)
 	GetClients(context.Context, *GetClientsReq) (*ClientListRes, error)
 	GetActiveConnections(context.Context, *EmptyReq) (*ClientListRes, error)
-	GetClientIDs(context.Context, *MessageReq) (*ClientListRes, error)
+	GetClientIDs(context.Context, *MessageReq) (*ClientIDsList, error)
 	mustEmbedUnimplementedHospitalServiceServer()
 }
 
@@ -103,7 +103,7 @@ func (UnimplementedHospitalServiceServer) GetClients(context.Context, *GetClient
 func (UnimplementedHospitalServiceServer) GetActiveConnections(context.Context, *EmptyReq) (*ClientListRes, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetActiveConnections not implemented")
 }
-func (UnimplementedHospitalServiceServer) GetClientIDs(context.Context, *MessageReq) (*ClientListRes, error) {
+func (UnimplementedHospitalServiceServer) GetClientIDs(context.Context, *MessageReq) (*ClientIDsList, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetClientIDs not implemented")
 }
 func (UnimplementedHospitalServiceServer) mustEmbedUnimplementedHospitalServiceServer() {}
