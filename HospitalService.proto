@@ -1,8 +1,6 @@
 syntax = "proto3";
 
-package hospital;
-
-option go_package = "HospitalService/proto";
+option go_package = "github.com/LysetsDal/HospitalService/proto";
 
 /*
 protoc --go_out=. --go_opt=paths=source_relative --go-grpc_out=. --go-grpc_opt=paths=source_relative HospitalService.proto

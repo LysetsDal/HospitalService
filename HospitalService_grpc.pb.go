@@ -19,11 +19,11 @@ import (
 const _ = grpc.SupportPackageIsVersion7
 
 const (
-	HospitalService_SendMessage_FullMethodName    = "/hospital.HospitalService/SendMessage"
-	HospitalService_GetClients_FullMethodName     = "/hospital.HospitalService/GetClients"
-	HospitalService_GetClientIDs_FullMethodName   = "/hospital.HospitalService/GetClientIDs"
-	HospitalService_RegisterClient_FullMethodName = "/hospital.HospitalService/RegisterClient"
-	HospitalService_TestCall_FullMethodName       = "/hospital.HospitalService/TestCall"
+	HospitalService_SendMessage_FullMethodName    = "/HospitalService/SendMessage"
+	HospitalService_GetClients_FullMethodName     = "/HospitalService/GetClients"
+	HospitalService_GetClientIDs_FullMethodName   = "/HospitalService/GetClientIDs"
+	HospitalService_RegisterClient_FullMethodName = "/HospitalService/RegisterClient"
+	HospitalService_TestCall_FullMethodName       = "/HospitalService/TestCall"
 )
 
 // HospitalServiceClient is the client API for HospitalService service.
@@ -228,7 +228,7 @@ func _HospitalService_TestCall_Handler(srv interface{}, ctx context.Context, dec
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
 var HospitalService_ServiceDesc = grpc.ServiceDesc{
-	ServiceName: "hospital.HospitalService",
+	ServiceName: "HospitalService",
 	HandlerType: (*HospitalServiceServer)(nil),
 	Methods: []grpc.MethodDesc{
 		{
