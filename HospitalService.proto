@@ -48,8 +48,6 @@ message RegisterRes {
     bool success = 1;
 }
 
-
-
 // Messages for secret sharing
 message ShareSecretRequest {
     int32 secret = 1;
