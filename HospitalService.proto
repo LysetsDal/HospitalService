@@ -17,7 +17,8 @@ service HospitalService {
 
 message MessageReq {
     string from = 1;
-    string payload = 2;
+    optional string targetID = 2; 
+    string payload = 3;
 }
 
 message EmptyReq {}
