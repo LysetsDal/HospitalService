@@ -8,17 +8,19 @@ protoc --go_out=. --go_opt=paths=source_relative --go-grpc_out=. --go-grpc_opt=p
 
 // HOSPITAL SERVER INTERFACE
 service HospitalService {
-    rpc SendMessage(MessageReq) returns (MessageRes) {}
+    rpc RegisterClient(RegisterReq) returns (RegisterRes) {}
     rpc GetClients(GetClientsReq) returns (ClientListRes) {}
     rpc GetClientIDs(MessageReq) returns (ClientIDsList) {}
-    rpc RegisterClient(RegisterReq) returns (RegisterRes) {}
-    rpc TestCall(EmptyReq) returns (TestCallRes) {}
+    rpc SendMessage(MessageReq) returns (MessageRes) {}
+    rpc ShareSecret(ShareSecretRequest) returns (ShareSecretResponse) {}
 }
 
 message MessageReq {
     string from = 1;
     string payload = 2;
 }
+
+message EmptyReq {}
 
 message MessageRes {
     string res = 1;
@@ -44,8 +46,15 @@ message RegisterRes {
     bool success = 1;
 }
 
-message TestCallRes {
-    bool worked = 1;
+
+
+// Messages for secret sharing
+message ShareSecretRequest {
+    int32 secret = 1;
+    int32 num_shares = 2;  // The number of shares to split the secret into.
 }
 
-message EmptyReq {}
+message ShareSecretResponse {
+    repeated int32 shares = 1;
+    string error_message = 2;  // Populated if there's an error.
+}
