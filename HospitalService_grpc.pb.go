@@ -19,22 +19,22 @@ import (
 const _ = grpc.SupportPackageIsVersion7
 
 const (
-	HospitalService_SendMessage_FullMethodName    = "/HospitalService/SendMessage"
+	HospitalService_RegisterClient_FullMethodName = "/HospitalService/RegisterClient"
 	HospitalService_GetClients_FullMethodName     = "/HospitalService/GetClients"
 	HospitalService_GetClientIDs_FullMethodName   = "/HospitalService/GetClientIDs"
-	HospitalService_RegisterClient_FullMethodName = "/HospitalService/RegisterClient"
-	HospitalService_TestCall_FullMethodName       = "/HospitalService/TestCall"
+	HospitalService_SendMessage_FullMethodName    = "/HospitalService/SendMessage"
+	HospitalService_ShareSecret_FullMethodName    = "/HospitalService/ShareSecret"
 )
 
 // HospitalServiceClient is the client API for HospitalService service.
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type HospitalServiceClient interface {
-	SendMessage(ctx context.Context, in *MessageReq, opts ...grpc.CallOption) (*MessageRes, error)
+	RegisterClient(ctx context.Context, in *RegisterReq, opts ...grpc.CallOption) (*RegisterRes, error)
 	GetClients(ctx context.Context, in *GetClientsReq, opts ...grpc.CallOption) (*ClientListRes, error)
 	GetClientIDs(ctx context.Context, in *MessageReq, opts ...grpc.CallOption) (*ClientIDsList, error)
-	RegisterClient(ctx context.Context, in *RegisterReq, opts ...grpc.CallOption) (*RegisterRes, error)
-	TestCall(ctx context.Context, in *EmptyReq, opts ...grpc.CallOption) (*TestCallRes, error)
+	SendMessage(ctx context.Context, in *MessageReq, opts ...grpc.CallOption) (*MessageRes, error)
+	ShareSecret(ctx context.Context, in *ShareSecretRequest, opts ...grpc.CallOption) (*ShareSecretResponse, error)
 }
 
 type hospitalServiceClient struct {
@@ -45,9 +45,9 @@ func NewHospitalServiceClient(cc grpc.ClientConnInterface) HospitalServiceClient
 	return &hospitalServiceClient{cc}
 }
 
-func (c *hospitalServiceClient) SendMessage(ctx context.Context, in *MessageReq, opts ...grpc.CallOption) (*MessageRes, error) {
-	out := new(MessageRes)
-	err := c.cc.Invoke(ctx, HospitalService_SendMessage_FullMethodName, in, out, opts...)
+func (c *hospitalServiceClient) RegisterClient(ctx context.Context, in *RegisterReq, opts ...grpc.CallOption) (*RegisterRes, error) {
+	out := new(RegisterRes)
+	err := c.cc.Invoke(ctx, HospitalService_RegisterClient_FullMethodName, in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -72,18 +72,18 @@ func (c *hospitalServiceClient) GetClientIDs(ctx context.Context, in *MessageReq
 	return out, nil
 }
 
-func (c *hospitalServiceClient) RegisterClient(ctx context.Context, in *RegisterReq, opts ...grpc.CallOption) (*RegisterRes, error) {
-	out := new(RegisterRes)
-	err := c.cc.Invoke(ctx, HospitalService_RegisterClient_FullMethodName, in, out, opts...)
+func (c *hospitalServiceClient) SendMessage(ctx context.Context, in *MessageReq, opts ...grpc.CallOption) (*MessageRes, error) {
+	out := new(MessageRes)
+	err := c.cc.Invoke(ctx, HospitalService_SendMessage_FullMethodName, in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *hospitalServiceClient) TestCall(ctx context.Context, in *EmptyReq, opts ...grpc.CallOption) (*TestCallRes, error) {
-	out := new(TestCallRes)
-	err := c.cc.Invoke(ctx, HospitalService_TestCall_FullMethodName, in, out, opts...)
+func (c *hospitalServiceClient) ShareSecret(ctx context.Context, in *ShareSecretRequest, opts ...grpc.CallOption) (*ShareSecretResponse, error) {
+	out := new(ShareSecretResponse)
+	err := c.cc.Invoke(ctx, HospitalService_ShareSecret_FullMethodName, in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -94,11 +94,11 @@ func (c *hospitalServiceClient) TestCall(ctx context.Context, in *EmptyReq, opts
 // All implementations must embed UnimplementedHospitalServiceServer
 // for forward compatibility
 type HospitalServiceServer interface {
-	SendMessage(context.Context, *MessageReq) (*MessageRes, error)
+	RegisterClient(context.Context, *RegisterReq) (*RegisterRes, error)
 	GetClients(context.Context, *GetClientsReq) (*ClientListRes, error)
 	GetClientIDs(context.Context, *MessageReq) (*ClientIDsList, error)
-	RegisterClient(context.Context, *RegisterReq) (*RegisterRes, error)
-	TestCall(context.Context, *EmptyReq) (*TestCallRes, error)
+	SendMessage(context.Context, *MessageReq) (*MessageRes, error)
+	ShareSecret(context.Context, *ShareSecretRequest) (*ShareSecretResponse, error)
 	mustEmbedUnimplementedHospitalServiceServer()
 }
 
@@ -106,8 +106,8 @@ type HospitalServiceServer interface {
 type UnimplementedHospitalServiceServer struct {
 }
 
-func (UnimplementedHospitalServiceServer) SendMessage(context.Context, *MessageReq) (*MessageRes, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method SendMessage not implemented")
+func (UnimplementedHospitalServiceServer) RegisterClient(context.Context, *RegisterReq) (*RegisterRes, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method RegisterClient not implemented")
 }
 func (UnimplementedHospitalServiceServer) GetClients(context.Context, *GetClientsReq) (*ClientListRes, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetClients not implemented")
@@ -115,11 +115,11 @@ func (UnimplementedHospitalServiceServer) GetClients(context.Context, *GetClient
 func (UnimplementedHospitalServiceServer) GetClientIDs(context.Context, *MessageReq) (*ClientIDsList, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetClientIDs not implemented")
 }
-func (UnimplementedHospitalServiceServer) RegisterClient(context.Context, *RegisterReq) (*RegisterRes, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method RegisterClient not implemented")
+func (UnimplementedHospitalServiceServer) SendMessage(context.Context, *MessageReq) (*MessageRes, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method SendMessage not implemented")
 }
-func (UnimplementedHospitalServiceServer) TestCall(context.Context, *EmptyReq) (*TestCallRes, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method TestCall not implemented")
+func (UnimplementedHospitalServiceServer) ShareSecret(context.Context, *ShareSecretRequest) (*ShareSecretResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ShareSecret not implemented")
 }
 func (UnimplementedHospitalServiceServer) mustEmbedUnimplementedHospitalServiceServer() {}
 
@@ -134,20 +134,20 @@ func RegisterHospitalServiceServer(s grpc.ServiceRegistrar, srv HospitalServiceS
 	s.RegisterService(&HospitalService_ServiceDesc, srv)
 }
 
-func _HospitalService_SendMessage_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(MessageReq)
+func _HospitalService_RegisterClient_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(RegisterReq)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(HospitalServiceServer).SendMessage(ctx, in)
+		return srv.(HospitalServiceServer).RegisterClient(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: HospitalService_SendMessage_FullMethodName,
+		FullMethod: HospitalService_RegisterClient_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(HospitalServiceServer).SendMessage(ctx, req.(*MessageReq))
+		return srv.(HospitalServiceServer).RegisterClient(ctx, req.(*RegisterReq))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -188,38 +188,38 @@ func _HospitalService_GetClientIDs_Handler(srv interface{}, ctx context.Context,
 	return interceptor(ctx, in, info, handler)
 }
 
-func _HospitalService_RegisterClient_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(RegisterReq)
+func _HospitalService_SendMessage_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(MessageReq)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(HospitalServiceServer).RegisterClient(ctx, in)
+		return srv.(HospitalServiceServer).SendMessage(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: HospitalService_RegisterClient_FullMethodName,
+		FullMethod: HospitalService_SendMessage_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(HospitalServiceServer).RegisterClient(ctx, req.(*RegisterReq))
+		return srv.(HospitalServiceServer).SendMessage(ctx, req.(*MessageReq))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _HospitalService_TestCall_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(EmptyReq)
+func _HospitalService_ShareSecret_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ShareSecretRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(HospitalServiceServer).TestCall(ctx, in)
+		return srv.(HospitalServiceServer).ShareSecret(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: HospitalService_TestCall_FullMethodName,
+		FullMethod: HospitalService_ShareSecret_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(HospitalServiceServer).TestCall(ctx, req.(*EmptyReq))
+		return srv.(HospitalServiceServer).ShareSecret(ctx, req.(*ShareSecretRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -232,8 +232,8 @@ var HospitalService_ServiceDesc = grpc.ServiceDesc{
 	HandlerType: (*HospitalServiceServer)(nil),
 	Methods: []grpc.MethodDesc{
 		{
-			MethodName: "SendMessage",
-			Handler:    _HospitalService_SendMessage_Handler,
+			MethodName: "RegisterClient",
+			Handler:    _HospitalService_RegisterClient_Handler,
 		},
 		{
 			MethodName: "GetClients",
@@ -244,12 +244,12 @@ var HospitalService_ServiceDesc = grpc.ServiceDesc{
 			Handler:    _HospitalService_GetClientIDs_Handler,
 		},
 		{
-			MethodName: "RegisterClient",
-			Handler:    _HospitalService_RegisterClient_Handler,
+			MethodName: "SendMessage",
+			Handler:    _HospitalService_SendMessage_Handler,
 		},
 		{
-			MethodName: "TestCall",
-			Handler:    _HospitalService_TestCall_Handler,
+			MethodName: "ShareSecret",
+			Handler:    _HospitalService_ShareSecret_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
