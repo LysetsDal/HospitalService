@@ -41,6 +41,7 @@ message ClientIDsList {
 
 message RegisterReq {
     string uuid = 1;
+    string listenAddr = 2;
 }
 
 message RegisterRes {
