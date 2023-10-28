@@ -21,7 +21,6 @@ const _ = grpc.SupportPackageIsVersion7
 const (
 	HospitalService_RegisterClient_FullMethodName      = "/HospitalService/RegisterClient"
 	HospitalService_GetClients_FullMethodName          = "/HospitalService/GetClients"
-	HospitalService_GetClientIDs_FullMethodName        = "/HospitalService/GetClientIDs"
 	HospitalService_SendMessageToServer_FullMethodName = "/HospitalService/SendMessageToServer"
 )
 
@@ -30,8 +29,7 @@ const (
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type HospitalServiceClient interface {
 	RegisterClient(ctx context.Context, in *RegisterReq, opts ...grpc.CallOption) (*RegisterRes, error)
-	GetClients(ctx context.Context, in *GetClientsReq, opts ...grpc.CallOption) (*ClientListRes, error)
-	GetClientIDs(ctx context.Context, in *MessageReq, opts ...grpc.CallOption) (*ClientIDsList, error)
+	GetClients(ctx context.Context, in *MessageReq, opts ...grpc.CallOption) (*ClientIDsList, error)
 	SendMessageToServer(ctx context.Context, in *MessageReq, opts ...grpc.CallOption) (*MessageRes, error)
 }
 
@@ -52,18 +50,9 @@ func (c *hospitalServiceClient) RegisterClient(ctx context.Context, in *Register
 	return out, nil
 }
 
-func (c *hospitalServiceClient) GetClients(ctx context.Context, in *GetClientsReq, opts ...grpc.CallOption) (*ClientListRes, error) {
-	out := new(ClientListRes)
-	err := c.cc.Invoke(ctx, HospitalService_GetClients_FullMethodName, in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *hospitalServiceClient) GetClientIDs(ctx context.Context, in *MessageReq, opts ...grpc.CallOption) (*ClientIDsList, error) {
+func (c *hospitalServiceClient) GetClients(ctx context.Context, in *MessageReq, opts ...grpc.CallOption) (*ClientIDsList, error) {
 	out := new(ClientIDsList)
-	err := c.cc.Invoke(ctx, HospitalService_GetClientIDs_FullMethodName, in, out, opts...)
+	err := c.cc.Invoke(ctx, HospitalService_GetClients_FullMethodName, in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -84,8 +73,7 @@ func (c *hospitalServiceClient) SendMessageToServer(ctx context.Context, in *Mes
 // for forward compatibility
 type HospitalServiceServer interface {
 	RegisterClient(context.Context, *RegisterReq) (*RegisterRes, error)
-	GetClients(context.Context, *GetClientsReq) (*ClientListRes, error)
-	GetClientIDs(context.Context, *MessageReq) (*ClientIDsList, error)
+	GetClients(context.Context, *MessageReq) (*ClientIDsList, error)
 	SendMessageToServer(context.Context, *MessageReq) (*MessageRes, error)
 	mustEmbedUnimplementedHospitalServiceServer()
 }
@@ -97,11 +85,8 @@ type UnimplementedHospitalServiceServer struct {
 func (UnimplementedHospitalServiceServer) RegisterClient(context.Context, *RegisterReq) (*RegisterRes, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method RegisterClient not implemented")
 }
-func (UnimplementedHospitalServiceServer) GetClients(context.Context, *GetClientsReq) (*ClientListRes, error) {
+func (UnimplementedHospitalServiceServer) GetClients(context.Context, *MessageReq) (*ClientIDsList, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetClients not implemented")
-}
-func (UnimplementedHospitalServiceServer) GetClientIDs(context.Context, *MessageReq) (*ClientIDsList, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method GetClientIDs not implemented")
 }
 func (UnimplementedHospitalServiceServer) SendMessageToServer(context.Context, *MessageReq) (*MessageRes, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method SendMessageToServer not implemented")
@@ -138,7 +123,7 @@ func _HospitalService_RegisterClient_Handler(srv interface{}, ctx context.Contex
 }
 
 func _HospitalService_GetClients_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(GetClientsReq)
+	in := new(MessageReq)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
@@ -150,25 +135,7 @@ func _HospitalService_GetClients_Handler(srv interface{}, ctx context.Context, d
 		FullMethod: HospitalService_GetClients_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(HospitalServiceServer).GetClients(ctx, req.(*GetClientsReq))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _HospitalService_GetClientIDs_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(MessageReq)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(HospitalServiceServer).GetClientIDs(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: HospitalService_GetClientIDs_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(HospitalServiceServer).GetClientIDs(ctx, req.(*MessageReq))
+		return srv.(HospitalServiceServer).GetClients(ctx, req.(*MessageReq))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -205,10 +172,6 @@ var HospitalService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "GetClients",
 			Handler:    _HospitalService_GetClients_Handler,
-		},
-		{
-			MethodName: "GetClientIDs",
-			Handler:    _HospitalService_GetClientIDs_Handler,
 		},
 		{
 			MethodName: "SendMessageToServer",
