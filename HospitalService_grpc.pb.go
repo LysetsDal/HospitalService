@@ -23,7 +23,6 @@ const (
 	HospitalService_GetClients_FullMethodName          = "/HospitalService/GetClients"
 	HospitalService_GetClientIDs_FullMethodName        = "/HospitalService/GetClientIDs"
 	HospitalService_SendMessageToServer_FullMethodName = "/HospitalService/SendMessageToServer"
-	HospitalService_ShareSecret_FullMethodName         = "/HospitalService/ShareSecret"
 )
 
 // HospitalServiceClient is the client API for HospitalService service.
@@ -34,7 +33,6 @@ type HospitalServiceClient interface {
 	GetClients(ctx context.Context, in *GetClientsReq, opts ...grpc.CallOption) (*ClientListRes, error)
 	GetClientIDs(ctx context.Context, in *MessageReq, opts ...grpc.CallOption) (*ClientIDsList, error)
 	SendMessageToServer(ctx context.Context, in *MessageReq, opts ...grpc.CallOption) (*MessageRes, error)
-	ShareSecret(ctx context.Context, in *ShareSecretReq, opts ...grpc.CallOption) (*ShareSecretRes, error)
 }
 
 type hospitalServiceClient struct {
@@ -81,15 +79,6 @@ func (c *hospitalServiceClient) SendMessageToServer(ctx context.Context, in *Mes
 	return out, nil
 }
 
-func (c *hospitalServiceClient) ShareSecret(ctx context.Context, in *ShareSecretReq, opts ...grpc.CallOption) (*ShareSecretRes, error) {
-	out := new(ShareSecretRes)
-	err := c.cc.Invoke(ctx, HospitalService_ShareSecret_FullMethodName, in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
 // HospitalServiceServer is the server API for HospitalService service.
 // All implementations must embed UnimplementedHospitalServiceServer
 // for forward compatibility
@@ -98,7 +87,6 @@ type HospitalServiceServer interface {
 	GetClients(context.Context, *GetClientsReq) (*ClientListRes, error)
 	GetClientIDs(context.Context, *MessageReq) (*ClientIDsList, error)
 	SendMessageToServer(context.Context, *MessageReq) (*MessageRes, error)
-	ShareSecret(context.Context, *ShareSecretReq) (*ShareSecretRes, error)
 	mustEmbedUnimplementedHospitalServiceServer()
 }
 
@@ -117,9 +105,6 @@ func (UnimplementedHospitalServiceServer) GetClientIDs(context.Context, *Message
 }
 func (UnimplementedHospitalServiceServer) SendMessageToServer(context.Context, *MessageReq) (*MessageRes, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method SendMessageToServer not implemented")
-}
-func (UnimplementedHospitalServiceServer) ShareSecret(context.Context, *ShareSecretReq) (*ShareSecretRes, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method ShareSecret not implemented")
 }
 func (UnimplementedHospitalServiceServer) mustEmbedUnimplementedHospitalServiceServer() {}
 
@@ -206,24 +191,6 @@ func _HospitalService_SendMessageToServer_Handler(srv interface{}, ctx context.C
 	return interceptor(ctx, in, info, handler)
 }
 
-func _HospitalService_ShareSecret_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(ShareSecretReq)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(HospitalServiceServer).ShareSecret(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: HospitalService_ShareSecret_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(HospitalServiceServer).ShareSecret(ctx, req.(*ShareSecretReq))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
 // HospitalService_ServiceDesc is the grpc.ServiceDesc for HospitalService service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -247,24 +214,22 @@ var HospitalService_ServiceDesc = grpc.ServiceDesc{
 			MethodName: "SendMessageToServer",
 			Handler:    _HospitalService_SendMessageToServer_Handler,
 		},
-		{
-			MethodName: "ShareSecret",
-			Handler:    _HospitalService_ShareSecret_Handler,
-		},
 	},
 	Streams:  []grpc.StreamDesc{},
 	Metadata: "HospitalService/HospitalService.proto",
 }
 
 const (
-	ClientService_SendMessageToCLient_FullMethodName = "/ClientService/SendMessageToCLient"
+	ClientService_SendMessageToClient_FullMethodName = "/ClientService/SendMessageToClient"
+	ClientService_ShareSecret_FullMethodName         = "/ClientService/ShareSecret"
 )
 
 // ClientServiceClient is the client API for ClientService service.
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type ClientServiceClient interface {
-	SendMessageToCLient(ctx context.Context, in *MessageReq, opts ...grpc.CallOption) (*MessageRes, error)
+	SendMessageToClient(ctx context.Context, in *MessageReq, opts ...grpc.CallOption) (*MessageRes, error)
+	ShareSecret(ctx context.Context, in *ShareSecretReq, opts ...grpc.CallOption) (*ShareSecretRes, error)
 }
 
 type clientServiceClient struct {
@@ -275,9 +240,18 @@ func NewClientServiceClient(cc grpc.ClientConnInterface) ClientServiceClient {
 	return &clientServiceClient{cc}
 }
 
-func (c *clientServiceClient) SendMessageToCLient(ctx context.Context, in *MessageReq, opts ...grpc.CallOption) (*MessageRes, error) {
+func (c *clientServiceClient) SendMessageToClient(ctx context.Context, in *MessageReq, opts ...grpc.CallOption) (*MessageRes, error) {
 	out := new(MessageRes)
-	err := c.cc.Invoke(ctx, ClientService_SendMessageToCLient_FullMethodName, in, out, opts...)
+	err := c.cc.Invoke(ctx, ClientService_SendMessageToClient_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *clientServiceClient) ShareSecret(ctx context.Context, in *ShareSecretReq, opts ...grpc.CallOption) (*ShareSecretRes, error) {
+	out := new(ShareSecretRes)
+	err := c.cc.Invoke(ctx, ClientService_ShareSecret_FullMethodName, in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -288,7 +262,8 @@ func (c *clientServiceClient) SendMessageToCLient(ctx context.Context, in *Messa
 // All implementations must embed UnimplementedClientServiceServer
 // for forward compatibility
 type ClientServiceServer interface {
-	SendMessageToCLient(context.Context, *MessageReq) (*MessageRes, error)
+	SendMessageToClient(context.Context, *MessageReq) (*MessageRes, error)
+	ShareSecret(context.Context, *ShareSecretReq) (*ShareSecretRes, error)
 	mustEmbedUnimplementedClientServiceServer()
 }
 
@@ -296,8 +271,11 @@ type ClientServiceServer interface {
 type UnimplementedClientServiceServer struct {
 }
 
-func (UnimplementedClientServiceServer) SendMessageToCLient(context.Context, *MessageReq) (*MessageRes, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method SendMessageToCLient not implemented")
+func (UnimplementedClientServiceServer) SendMessageToClient(context.Context, *MessageReq) (*MessageRes, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method SendMessageToClient not implemented")
+}
+func (UnimplementedClientServiceServer) ShareSecret(context.Context, *ShareSecretReq) (*ShareSecretRes, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ShareSecret not implemented")
 }
 func (UnimplementedClientServiceServer) mustEmbedUnimplementedClientServiceServer() {}
 
@@ -312,20 +290,38 @@ func RegisterClientServiceServer(s grpc.ServiceRegistrar, srv ClientServiceServe
 	s.RegisterService(&ClientService_ServiceDesc, srv)
 }
 
-func _ClientService_SendMessageToCLient_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _ClientService_SendMessageToClient_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(MessageReq)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(ClientServiceServer).SendMessageToCLient(ctx, in)
+		return srv.(ClientServiceServer).SendMessageToClient(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: ClientService_SendMessageToCLient_FullMethodName,
+		FullMethod: ClientService_SendMessageToClient_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(ClientServiceServer).SendMessageToCLient(ctx, req.(*MessageReq))
+		return srv.(ClientServiceServer).SendMessageToClient(ctx, req.(*MessageReq))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _ClientService_ShareSecret_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ShareSecretReq)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ClientServiceServer).ShareSecret(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: ClientService_ShareSecret_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ClientServiceServer).ShareSecret(ctx, req.(*ShareSecretReq))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -338,8 +334,12 @@ var ClientService_ServiceDesc = grpc.ServiceDesc{
 	HandlerType: (*ClientServiceServer)(nil),
 	Methods: []grpc.MethodDesc{
 		{
-			MethodName: "SendMessageToCLient",
-			Handler:    _ClientService_SendMessageToCLient_Handler,
+			MethodName: "SendMessageToClient",
+			Handler:    _ClientService_SendMessageToClient_Handler,
+		},
+		{
+			MethodName: "ShareSecret",
+			Handler:    _ClientService_ShareSecret_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
