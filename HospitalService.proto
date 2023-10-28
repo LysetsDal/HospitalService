@@ -12,11 +12,11 @@ service HospitalService {
     rpc GetClients(GetClientsReq) returns (ClientListRes) {}
     rpc GetClientIDs(MessageReq) returns (ClientIDsList) {}
     rpc SendMessageToServer(MessageReq) returns (MessageRes) {}
-    rpc ShareSecret(ShareSecretReq) returns (ShareSecretRes) {}
 }
 
 service ClientService {
     rpc SendMessageToCLient(MessageReq) returns (MessageRes) {}
+    rpc ShareSecret(ShareSecretReq) returns (ShareSecretRes) {}
 }
 
 message MessageReq {
