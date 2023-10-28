@@ -11,8 +11,12 @@ service HospitalService {
     rpc RegisterClient(RegisterReq) returns (RegisterRes) {}
     rpc GetClients(GetClientsReq) returns (ClientListRes) {}
     rpc GetClientIDs(MessageReq) returns (ClientIDsList) {}
-    rpc SendMessage(MessageReq) returns (MessageRes) {}
-    rpc ShareSecret(ShareSecretRequest) returns (ShareSecretResponse) {}
+    rpc SendMessageToServer(MessageReq) returns (MessageRes) {}
+    rpc ShareSecret(ShareSecretReq) returns (ShareSecretRes) {}
+}
+
+service ClientService {
+    rpc SendMessageToCLient(MessageReq) returns (MessageRes) {}
 }
 
 message MessageReq {
@@ -49,12 +53,12 @@ message RegisterRes {
 }
 
 // Messages for secret sharing
-message ShareSecretRequest {
+message ShareSecretReq {
     int32 secret = 1;
     int32 num_shares = 2;  // The number of shares to split the secret into.
 }
 
-message ShareSecretResponse {
+message ShareSecretRes {
     repeated int32 shares = 1;
     string error_message = 2;  // Populated if there's an error.
 }
