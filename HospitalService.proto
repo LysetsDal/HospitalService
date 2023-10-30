@@ -15,8 +15,9 @@ service HospitalService {
 }
 
 service ClientService {
-    rpc SendMessagePeer(MessageReq) returns (MessageRes) {}
+    rpc SendMessageToPeer(MessageReq) returns (MessageRes) {}
     rpc ShareSecret(ShareSecretReq) returns (ShareSecretRes) {}
+    rpc SendShareToPeer(MessageReq) returns (ShareMessage) {}
 }
 
 message MessageReq {
@@ -61,4 +62,10 @@ message ShareSecretReq {
 message ShareSecretRes {
     repeated int32 shares = 1;
     string error_message = 2;  // Populated if there's an error.
+}
+
+message ShareMessage {
+    string from = 1;
+    optional string targetID = 2;
+    int32 payload = 3;
 }
