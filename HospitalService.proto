@@ -11,10 +11,11 @@ service HospitalService {
     rpc RegisterClient(RegisterReq) returns (RegisterRes) {}
     rpc GetClients(MessageReq) returns (ClientIDsList) {}
     rpc SendMessageToServer(MessageReq) returns (MessageRes) {}
+    rpc SendSecretToServer(ShareSecretRes) returns (MessageRes) {}
 }
 
 service ClientService {
-    rpc SendMessageToClient(MessageReq) returns (MessageRes) {}
+    rpc SendMessagePeer(MessageReq) returns (MessageRes) {}
     rpc ShareSecret(ShareSecretReq) returns (ShareSecretRes) {}
 }
 
