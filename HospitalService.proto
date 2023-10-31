@@ -22,7 +22,7 @@ service ClientService {
 
 message MessageReq {
     string from = 1;
-    optional string targetID = 2; 
+    optional string targetID = 2;
     string payload = 3;
 }
 
