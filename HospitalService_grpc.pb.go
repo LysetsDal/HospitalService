@@ -231,7 +231,7 @@ const (
 type ClientServiceClient interface {
 	SendMessageToPeer(ctx context.Context, in *MessageReq, opts ...grpc.CallOption) (*MessageRes, error)
 	ShareSecret(ctx context.Context, in *ShareSecretReq, opts ...grpc.CallOption) (*ShareSecretRes, error)
-	SendShareToPeer(ctx context.Context, in *ShareMessage, opts ...grpc.CallOption) (*ShareMessage, error)
+	SendShareToPeer(ctx context.Context, in *ShareMessage, opts ...grpc.CallOption) (*EmptyReq, error)
 }
 
 type clientServiceClient struct {
@@ -260,8 +260,8 @@ func (c *clientServiceClient) ShareSecret(ctx context.Context, in *ShareSecretRe
 	return out, nil
 }
 
-func (c *clientServiceClient) SendShareToPeer(ctx context.Context, in *ShareMessage, opts ...grpc.CallOption) (*ShareMessage, error) {
-	out := new(ShareMessage)
+func (c *clientServiceClient) SendShareToPeer(ctx context.Context, in *ShareMessage, opts ...grpc.CallOption) (*EmptyReq, error) {
+	out := new(EmptyReq)
 	err := c.cc.Invoke(ctx, ClientService_SendShareToPeer_FullMethodName, in, out, opts...)
 	if err != nil {
 		return nil, err
@@ -275,7 +275,7 @@ func (c *clientServiceClient) SendShareToPeer(ctx context.Context, in *ShareMess
 type ClientServiceServer interface {
 	SendMessageToPeer(context.Context, *MessageReq) (*MessageRes, error)
 	ShareSecret(context.Context, *ShareSecretReq) (*ShareSecretRes, error)
-	SendShareToPeer(context.Context, *ShareMessage) (*ShareMessage, error)
+	SendShareToPeer(context.Context, *ShareMessage) (*EmptyReq, error)
 	mustEmbedUnimplementedClientServiceServer()
 }
 
@@ -289,7 +289,7 @@ func (UnimplementedClientServiceServer) SendMessageToPeer(context.Context, *Mess
 func (UnimplementedClientServiceServer) ShareSecret(context.Context, *ShareSecretReq) (*ShareSecretRes, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ShareSecret not implemented")
 }
-func (UnimplementedClientServiceServer) SendShareToPeer(context.Context, *ShareMessage) (*ShareMessage, error) {
+func (UnimplementedClientServiceServer) SendShareToPeer(context.Context, *ShareMessage) (*EmptyReq, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method SendShareToPeer not implemented")
 }
 func (UnimplementedClientServiceServer) mustEmbedUnimplementedClientServiceServer() {}
