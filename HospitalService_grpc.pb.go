@@ -231,7 +231,7 @@ const (
 type ClientServiceClient interface {
 	SendMessageToPeer(ctx context.Context, in *MessageReq, opts ...grpc.CallOption) (*MessageRes, error)
 	ShareSecret(ctx context.Context, in *ShareSecretReq, opts ...grpc.CallOption) (*ShareSecretRes, error)
-	SendShareToPeer(ctx context.Context, in *MessageReq, opts ...grpc.CallOption) (*ShareMessage, error)
+	SendShareToPeer(ctx context.Context, in *ShareMessage, opts ...grpc.CallOption) (*ShareMessage, error)
 }
 
 type clientServiceClient struct {
@@ -260,7 +260,7 @@ func (c *clientServiceClient) ShareSecret(ctx context.Context, in *ShareSecretRe
 	return out, nil
 }
 
-func (c *clientServiceClient) SendShareToPeer(ctx context.Context, in *MessageReq, opts ...grpc.CallOption) (*ShareMessage, error) {
+func (c *clientServiceClient) SendShareToPeer(ctx context.Context, in *ShareMessage, opts ...grpc.CallOption) (*ShareMessage, error) {
 	out := new(ShareMessage)
 	err := c.cc.Invoke(ctx, ClientService_SendShareToPeer_FullMethodName, in, out, opts...)
 	if err != nil {
@@ -275,7 +275,7 @@ func (c *clientServiceClient) SendShareToPeer(ctx context.Context, in *MessageRe
 type ClientServiceServer interface {
 	SendMessageToPeer(context.Context, *MessageReq) (*MessageRes, error)
 	ShareSecret(context.Context, *ShareSecretReq) (*ShareSecretRes, error)
-	SendShareToPeer(context.Context, *MessageReq) (*ShareMessage, error)
+	SendShareToPeer(context.Context, *ShareMessage) (*ShareMessage, error)
 	mustEmbedUnimplementedClientServiceServer()
 }
 
@@ -289,7 +289,7 @@ func (UnimplementedClientServiceServer) SendMessageToPeer(context.Context, *Mess
 func (UnimplementedClientServiceServer) ShareSecret(context.Context, *ShareSecretReq) (*ShareSecretRes, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ShareSecret not implemented")
 }
-func (UnimplementedClientServiceServer) SendShareToPeer(context.Context, *MessageReq) (*ShareMessage, error) {
+func (UnimplementedClientServiceServer) SendShareToPeer(context.Context, *ShareMessage) (*ShareMessage, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method SendShareToPeer not implemented")
 }
 func (UnimplementedClientServiceServer) mustEmbedUnimplementedClientServiceServer() {}
@@ -342,7 +342,7 @@ func _ClientService_ShareSecret_Handler(srv interface{}, ctx context.Context, de
 }
 
 func _ClientService_SendShareToPeer_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(MessageReq)
+	in := new(ShareMessage)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
@@ -354,7 +354,7 @@ func _ClientService_SendShareToPeer_Handler(srv interface{}, ctx context.Context
 		FullMethod: ClientService_SendShareToPeer_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(ClientServiceServer).SendShareToPeer(ctx, req.(*MessageReq))
+		return srv.(ClientServiceServer).SendShareToPeer(ctx, req.(*ShareMessage))
 	}
 	return interceptor(ctx, in, info, handler)
 }

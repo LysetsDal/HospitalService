@@ -17,7 +17,7 @@ service HospitalService {
 service ClientService {
     rpc SendMessageToPeer(MessageReq) returns (MessageRes) {}
     rpc ShareSecret(ShareSecretReq) returns (ShareSecretRes) {}
-    rpc SendShareToPeer(MessageReq) returns (ShareMessage) {}
+    rpc SendShareToPeer(ShareMessage) returns (ShareMessage) {}
 }
 
 message MessageReq {
